@@ -1,0 +1,11 @@
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) 
+	-Lmlx_linux //pasta
+	-lmlx_Linux //livraria
+	-Imlx_linux //includes
+	-lXext //biblioteca
+	-lX11 //xserver...
+	-lm //math
+	 -lz //??
+	 -o $(NAME)
+
