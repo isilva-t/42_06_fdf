@@ -6,7 +6,7 @@
 /*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:10:06 by isilva-t          #+#    #+#             */
-/*   Updated: 2024/07/09 15:22:53 by isilva-t         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:45:29 by isilva-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ int main()
 	if (!mlx_connection)
 		return (MALLOC_ERROR);
 
-	mlx_window = mlx_new_window(mlx_connection,
-							 HEIGHT,
-							 WIDTH,
-							 "My window");
+	mlx_window = mlx_new_window(mlx_connection, HEIGHT, WIDTH, "My window");
 	if (!mlx_window)
 	{
 		mlx_destroy_display(mlx_connection);
@@ -41,4 +38,5 @@ int main()
 	mlx_destroy_window(mlx_connection, mlx_window); 
 	mlx_destroy_display(mlx_connection);
 	free(mlx_connection);
+	return (0);
 }
