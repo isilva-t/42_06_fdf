@@ -15,7 +15,7 @@ NAME = fdf
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = study_mlx.c
+SRCS = fdf.c
 
 
 

@@ -19,10 +19,20 @@
 #define HEIGHT			400
 #define SIDE_LEN		400
 
+typedef struct s_img
+{
+	void	*img_ptr;
+	char	*img_pixels_ptr;
+	int		bits_per_pixel;
+	int		endian;
+	int		line_len;
+}				t_img;
+
 typedef struct s_mlx_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	t_img	img;
 }			t_mlx_data;
 
 typedef unsigned char	byte;
@@ -30,6 +40,18 @@ typedef unsigned char	byte;
 int encode_rgb(byte red, byte green, byte blue)
 {
 	return (red << 16 | green << 8 | blue);
+}
+
+void	my_pixel_put(t_img *img, int x, int y, int color)
+{
+	int	offset;
+
+	offset = (img->line_len * y) 
+		+ (x * (img->bits_per_pixel / 8));
+
+	*((unsigned int *)
+		(offset + img->img_pixels_ptr)) 
+		= color;
 }
 
 void	color_screen(t_mlx_data *data, int color)
@@ -42,7 +64,8 @@ void	color_screen(t_mlx_data *data, int color)
 		x = 0;
 		while (++x < SIDE_LEN)
 		{
-			mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, color);
+			//mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, color);
+			my_pixel_put(&data->img, x, y, color);
 		}
 	}
 }
@@ -63,6 +86,7 @@ int	handle_input(int keysym, t_mlx_data *data)
 		free(data->mlx_ptr);
 		exit(1);
 	}
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img_ptr, 0, 0);
 	return (0);
 }
 
@@ -82,6 +106,14 @@ int	main ()
 		return (1);
 	}
 	
+	data.img.img_ptr = mlx_new_image(data.mlx_ptr, SIDE_LEN, SIDE_LEN);
+	data.img.img_pixels_ptr = mlx_get_data_addr(data.img.img_ptr,
+											 &data.img.bits_per_pixel,
+											 &data.img.line_len,
+											 &data.img.endian);
+
+
+
 	mlx_key_hook(data.win_ptr, handle_input , &data);
 	
 	mlx_loop(data.mlx_ptr);
