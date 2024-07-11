@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/08 09:54:24 by isilva-t          #+#    #+#             */
-/*   Updated: 2024/05/08 09:54:34 by isilva-t         ###   ########.fr       */
+/*   Created: 2024/06/20 14:18:07 by isilva-t          #+#    #+#             */
+/*   Updated: 2024/06/20 14:22:44 by isilva-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+long	ft_atol(const char *nptr)
+{
+	int	i;
+	int	signal;
+	int	num;
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
-# include <limits.h>
-
-int	ft_printf(const char *str, ...);
-int	pf_print_str(char *str, int cont);
-int	pf_putchar(int c);
-int	pf_print_format(char spec, va_list *ap, int cont);
-int	pf_put_nbr_base(long n, int base, int hex_cap);
-int	pf_print_ptr(unsigned long long n, int cont);
-
-#endif
+	i = 0;
+	signal = 1;
+	num = 0;
+	while ((nptr[i] != '\0' && nptr[i] >= '\t' && nptr[i] <= '\r')
+		|| nptr[i] == ' ')
+	{
+		i++;
+	}
+	if (nptr[i] == '+' || nptr[i] == '-')
+	{
+		if (nptr[i++] == '-')
+			signal = -1;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9' && nptr[i] != '\0')
+	{
+		num = num * 10 + nptr[i++] - '0';
+	}
+	return (num * signal);
+}

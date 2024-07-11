@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
-static int	count_words(const char *s, char c)
+int	ft_count_words(const char *s, char c)
 {
 	int	i;
 	int	count;
@@ -45,7 +45,7 @@ static int	get_len(const char *s, char c)
 	return (len);
 }
 
-static void	free_mem(int in_word, char **array)
+void	ft_free_split_mem(int in_word, char **array)
 {
 	while (in_word >= 0)
 	{
@@ -69,7 +69,7 @@ static char	**split(char const *s, char c, char **array, int n_words)
 		*(array + in_word) = ft_substr(s, on_char, get_len((s + on_char), c));
 		if (!*(array + in_word))
 		{
-			free_mem(in_word, array);
+			ft_free_split_mem(in_word, array);
 			return (NULL);
 		}
 		while (*(s + on_char) && *(s + on_char) != c)
@@ -82,12 +82,10 @@ static char	**split(char const *s, char c, char **array, int n_words)
 	return (array);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_my_split(char const *s, char c, int n_words)
 {
-	int		n_words;
 	char	**array;
 
-	n_words = count_words(s, c);
 	if (!s)
 		return (NULL);
 	array = (char **)malloc(sizeof(char *) * (n_words + 1));

@@ -85,6 +85,5 @@ int	pf_print_str(char *str, int cont)
 
 int	pf_putchar(int c)
 {
-	write(1, &c, 1);
-	return (1);
+	return (write(1, &c, 1));
 }

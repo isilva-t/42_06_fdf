@@ -15,35 +15,35 @@ CFLAGS = -Wall -Wextra -Werror
 
 LIBFT_DIR = ./libs/libft/
 LIBFT = ./libs/libft/libft.a
-FT_PRINTF_DIR = ./libs/ft_printf/
-FT_PRINTF = ./libs/ft_printf/libftprintf.a
+
+GNL = ./libs/gnl/get_next_line.c \
+	./libs/gnl/get_next_line_utils.c
+FT_PRINTF = ./libs/ft_printf/ft_printf.c \
+	./libs/ft_printf/pf_print_ptr.c \
+	./libs/ft_printf/pf_put_nbr_base.c 
 
 MLX = -Lminilibx-linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz -O3
 NAME = fdf
 
-SRCS = fdf.c
-
+SRCS = fdf.c $(GNL)
 
 OBJS = ${SRCS:.c=.o}
 MSG1 = @echo "_________________________________________________________________ Compiled!"
 
 all: $(NAME)
 
-$(NAME): 
+$(NAME):
 	@make -C $(LIBFT_DIR)
 	@make bonus -C $(LIBFT_DIR)
-	@make -C $(FT_PRINTF_DIR)
-	@$(CC) ${CFLAGS} $(SRCS) $(LIBFT) $(MLX) -o $(NAME)
+	@$(CC) ${CFLAGS} $(SRCS) $(LIBFT) $(FT_PRINTF) $(MLX) -o $(NAME)
 	$(MSG1)
 
 clean:
 	@make clean -C $(LIBFT_DIR)
-	@make clean -C $(FT_PRINTF_DIR)	
 	@rm -rf ${OBJS}
 
 fclean: clean
 	@make fclean -C $(LIBFT_DIR)
-	@make fclean -C $(FT_PRINTF_DIR)	
 	@rm -rf ${NAME}
 
 re: fclean all

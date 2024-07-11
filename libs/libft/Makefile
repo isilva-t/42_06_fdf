@@ -27,44 +27,35 @@ SOURCES = ft_isalpha.c ft_isdigit.c  ft_isalnum.c \
 BONUS =	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
 	ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
 	ft_lstclear.c ft_lstiter.c ft_lstmap.c
+MYFTS = ./myfts/ift_atol.c ./myfts/ift_split.c
+
 OBJECTS = ${SOURCES:.c=.o}
 BONUS_OBJECTS = ${BONUS:.c=.o}
+MYFTS_OBJ = ${MYFTS:.c=.o}
 
 NAME = libft.a
 ARCHIVE = ar -rcs
-
-MSG1 = @echo "________ Compiled Mandatory files!"
-MSG2 = @echo "________ Compiled Bonus files!"
-MSG3 = @echo "___________ Cleared!"
-MSG4 = @echo "_______________ Full Cleared!"
 
 $(NAME):
 	@${CC} -c ${CFLAGS} $(SOURCES) 
 	@${ARCHIVE} $(NAME) ${OBJECTS}
 
-	
 bonus: $(NAME)
 	@${CC} -c ${CFLAGS} $(BONUS) 
 	@${ARCHIVE} $(NAME) ${BONUS_OBJECTS}
-
-
-ma: 
-	cc $(SOURCES)
-	@echo "\n______Test_Compiled_!\n"
-bo:
-	cc $(BONUS) $(SOURCES)
-	@echo "\n______Bonus_Test_Compiled_!\n"
+	
+myfts: $(NAME)
+	@${CC} -c ${CFLAGS} $(MYFTS) 
+	@${ARCHIVE} $(NAME) ${MYFTS_OBJ}
 	
 all: ${NAME}
 
 clean:
-	@rm -rf ${OBJECTS} ${BONUS_OBJECTS}
-
+	@rm -rf ${OBJECTS} ${BONUS_OBJECTS} ${MYFTS_OBS}
 
 fclean: clean
 	@rm -rf ${NAME}
 
-
 re: fclean all
 
-.PHONY: all bonus clean fclean re so bo
+.PHONY: all bonus clean fclean re
