@@ -22,7 +22,7 @@ typedef struct s_list
 	struct s_list	*next;
 }		t_list;
 //__________________MY FT'S
-char	**ft_my_split(char const *s, char c);
+char	**ft_my_split(char const *s, char c, int n_words);
 int		ft_count_words(const char *s, char c);
 void	ft_free_split_mem(int in_word, char **array);
 long	ft_atol(const char *nptr);

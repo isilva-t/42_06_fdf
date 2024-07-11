@@ -6,7 +6,7 @@
 /*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:21:19 by isilva-t          #+#    #+#             */
-/*   Updated: 2024/07/11 12:52:23 by isilva-t         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:56:22 by isilva-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
-
+# include <limits.h>
 
 # include <stdio.h> //remove before submission
 
