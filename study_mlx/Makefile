@@ -6,45 +6,43 @@
 #    By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/09 16:42:03 by isilva-t          #+#    #+#              #
-#    Updated: 2024/07/11 11:23:19 by isilva-t         ###   ########.fr        #
+#    Updated: 2024/07/09 17:16:22 by isilva-t         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+NAME = fdf
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-LIBFT_DIR = ./libs/libft/
-LIBFT = ./libs/libft/libft.a
-FT_PRINTF_DIR = ./libs/ft_printf/
-FT_PRINTF = ./libs/ft_printf/libftprintf.a
+SRCS = study_mlx.c
 
-MLX = -Lminilibx-linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz -O3
-NAME = fdf
 
-SRCS = fdf.c
+
 
 
 OBJS = ${SRCS:.c=.o}
-MSG1 = @echo "_________________________________________________________________ Compiled!"
+
+MLX = -Lmlx_linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz -O3
 
 all: $(NAME)
 
+MSG1 = @echo "________ Compiled Mandatory files!"
+MSG2 = @echo "________ Compiled Bonus files!"
+MSG3 = @echo "___________ Cleared!"
+MSG4 = @echo "_______________ Full Cleared!"
+
 $(NAME): 
-	@make -C $(LIBFT_DIR)
-	@make bonus -C $(LIBFT_DIR)
-	@make -C $(FT_PRINTF_DIR)
-	@$(CC) ${CFLAGS} $(SRCS) $(LIBFT) $(MLX) -o $(NAME)
-	$(MSG1)
+	$(CC) ${CFLAGS} $(SRCS) $(MLX) -o $(NAME)
 
 clean:
-	@make clean -C $(LIBFT_DIR)
-	@make clean -C $(FT_PRINTF_DIR)	
 	@rm -rf ${OBJS}
+	${MSG3}
 
 fclean: clean
-	@make fclean -C $(LIBFT_DIR)
-	@make fclean -C $(FT_PRINTF_DIR)	
 	@rm -rf ${NAME}
+	${MSG4}
 
 re: fclean all
+
 .PHONY: all clean fclean re
