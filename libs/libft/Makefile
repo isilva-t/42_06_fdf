@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fPIC
 SOURCES = ft_isalpha.c ft_isdigit.c  ft_isalnum.c \
 	ft_isascii.c ft_isprint.c ft_strlen.c \
 	ft_memset.c ft_bzero.c ft_memcpy.c \
@@ -23,15 +23,14 @@ SOURCES = ft_isalpha.c ft_isdigit.c  ft_isalnum.c \
 	ft_substr.c ft_strjoin.c ft_strtrim.c \
 	ft_split.c ft_itoa.c ft_strmapi.c \
 	ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
-	ft_putendl_fd.c ft_putnbr_fd.c
+	ft_putendl_fd.c ft_putnbr_fd.c \
+	ift_atol.c ift_split.c
 BONUS =	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
 	ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
 	ft_lstclear.c ft_lstiter.c ft_lstmap.c
-MYFTS = ./myfts/ift_atol.c ./myfts/ift_split.c
 
 OBJECTS = ${SOURCES:.c=.o}
 BONUS_OBJECTS = ${BONUS:.c=.o}
-MYFTS_OBJ = ${MYFTS:.c=.o}
 
 NAME = libft.a
 ARCHIVE = ar -rcs
@@ -44,14 +43,10 @@ bonus: $(NAME)
 	@${CC} -c ${CFLAGS} $(BONUS) 
 	@${ARCHIVE} $(NAME) ${BONUS_OBJECTS}
 	
-myfts: $(NAME)
-	@${CC} -c ${CFLAGS} $(MYFTS) 
-	@${ARCHIVE} $(NAME) ${MYFTS_OBJ}
-	
 all: ${NAME}
 
 clean:
-	@rm -rf ${OBJECTS} ${BONUS_OBJECTS} ${MYFTS_OBS}
+	@rm -rf ${OBJECTS} ${BONUS_OBJECTS}
 
 fclean: clean
 	@rm -rf ${NAME}
