@@ -26,6 +26,7 @@ char	**ft_my_split(char const *s, char c, int n_words);
 int		ft_count_words(const char *s, char c);
 void	ft_free_split_mem(int in_word, char **array);
 long	ft_atol(const char *nptr);
+int		ft_atoi_base(const char *str, int str_base);
 //_____________________________________LIBFT_PART__1
 //PAGE 6, LEFT COLUMN
 int		ft_isalpha(int c);
