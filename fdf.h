@@ -35,9 +35,10 @@ typedef struct s_map
 {
 	t_pt	**pts;
 	int	height;
-	int	width;
+	int	*width;
 }			t_map;
 
+typedef struct s_split
 //parse_1
 int	have_color(const char *str);
 long	get_z(const char *str);
