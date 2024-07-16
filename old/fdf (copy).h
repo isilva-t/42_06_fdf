@@ -25,22 +25,22 @@
 
 # include <stdio.h> //remove before submission
 
-typedef struct s_pt
+typedef struct s_map_size
 {
-	int	z;
-	int	color;
-}			t_pt;
+	int	x_size;
+	int	y_size;
+}			t_map_size;
 
-typedef struct s_map
+typedef struct s_matrix
 {
-	t_pt	**pts;
-	int	height;
-	int	width;
-}			t_map;
+	int		x;
+	int		y;
+	int		z;
+	int		color;
+	struct s_matrix	*prev;
+	struct s_matrix	*next;
+}			t_matrix;
 
-//parse_1
-int	have_color(const char *str);
-long	get_z(const char *str);
-int	get_color(const char	*color_str);
+
 
 #endif
