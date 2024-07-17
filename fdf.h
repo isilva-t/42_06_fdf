@@ -6,7 +6,7 @@
 /*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:21:19 by isilva-t          #+#    #+#             */
-/*   Updated: 2024/07/11 17:56:22 by isilva-t         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:19:43 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,24 @@ typedef struct s_map_size
 typedef struct s_pt
 {
 	long	z;
-	int	color;
+	int		color;
 }			t_pt;
 
 typedef struct s_map
 {
 	t_pt	**pt;
-	int	height;
-	int	*width;
-	int	y_lines;
+	int		height;
+	int		*width;
+	int		y_lines;
+	int		fd1;
+	char	*big_str;
+	int		have_error;
 }			t_map;
 
-//typedef struct s_split
-
-//parse_1
-//int	have_color(const char *str);
+//a_parsing
+int		have_color(const char *str);
+void	make_big_array(char *av, t_map *map, char *line);
+void	print_created_map(t_map *map, int i);
 //long	get_z(const char *str);
 //int	get_color(const char	*color_str);
 

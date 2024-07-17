@@ -25,7 +25,7 @@ FT_PRINTF = ./libs/ft_printf/ft_printf.c \
 MLX = -Lminilibx-linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz -O3
 NAME = fdf
 
-SRCS = fdf.c $(GNL)
+SRCS = $(GNL) fdf.c ./a_parsing/0_read_and_handle.c
 
 OBJS = ${SRCS:.c=.o}
 MSG1 = @echo "_________________________________________________________________ Compiled!"
