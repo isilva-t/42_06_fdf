@@ -22,9 +22,9 @@ typedef struct s_list
 	struct s_list	*next;
 }		t_list;
 //__________________MY FT'S
-char	**ft_my_split(char const *s, char c, int n_words);
+char	**ft_my_split(char const *s, char c, int *n_words);
 int		ft_count_words(const char *s, char c);
-void	ft_free_split_mem(int in_word, char **array);
+void	ft_free_split_mem(int *in_word, char **array);
 long	ft_atol(const char *nptr);
 int		ft_atoi_base(const char *str, int str_base);
 //_____________________________________LIBFT_PART__1

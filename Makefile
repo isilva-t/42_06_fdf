@@ -25,7 +25,7 @@ FT_PRINTF = ./libs/ft_printf/ft_printf.c \
 MLX = -Lminilibx-linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz -O3
 NAME = fdf
 
-SRCS = fdf.c $(GNL) parse_1.c
+SRCS = fdf.c $(GNL)
 
 OBJS = ${SRCS:.c=.o}
 MSG1 = @echo "_________________________________________________________________ Compiled!"
@@ -34,8 +34,7 @@ all: $(NAME)
 
 $(NAME):
 	@make -C $(LIBFT_DIR)
-	@make bonus -C $(LIBFT_DIR)
-	@$(CC) ${CFLAGS} $(SRCS) $(LIBFT) $(FT_PRINTF) $(MLX) -o $(NAME)
+	@$(CC) ${CFLAGS} $(SRCS) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 	$(MSG1)
 
 clean:

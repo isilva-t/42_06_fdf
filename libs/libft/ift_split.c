@@ -45,31 +45,31 @@ static int	get_len(const char *s, char c)
 	return (len);
 }
 
-void	ft_free_split_mem(int in_word, char **array)
+void	ft_free_split_mem(int *in_word, char **array)
 {
-	while (in_word >= 0)
+	while (*in_word >= 0)
 	{
-		free(*(array + in_word));
-		in_word--;
+		free(*(array + *in_word));
+		*in_word -= 1;
 	}
 	free(array);
 }
 
-static char	**split(char const *s, char c, char **array, int n_words)
+static char	**split(char const *s, char c, char **array, int *n_words)
 {
 	int	in_word;
 	int	on_char;
 
 	in_word = 0;
 	on_char = 0;
-	while (in_word < n_words)
+	while (in_word < *n_words)
 	{
 		while (*(s + on_char) && *(s + on_char) == c)
 			on_char++;
 		*(array + in_word) = ft_substr(s, on_char, get_len((s + on_char), c));
 		if (!*(array + in_word))
 		{
-			ft_free_split_mem(in_word, array);
+			ft_free_split_mem(&in_word, array);
 			return (NULL);
 		}
 		while (*(s + on_char) && *(s + on_char) != c)
@@ -82,13 +82,14 @@ static char	**split(char const *s, char c, char **array, int n_words)
 	return (array);
 }
 
-char	**ft_my_split(char const *s, char c, int n_words)
+char	**ft_my_split(char const *s, char c, int *n_words)
 {
 	char	**array;
 
+	*n_words = ft_count_words(s, c);
 	if (!s)
 		return (NULL);
-	array = (char **)malloc(sizeof(char *) * (n_words + 1));
+	array = (char **)malloc(sizeof(char *) * (*n_words + 1));
 	if (!array)
 		return (NULL);
 	array = split(s, c, array, n_words);

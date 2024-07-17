@@ -25,23 +25,33 @@
 
 # include <stdio.h> //remove before submission
 
+typedef struct s_map_size
+{
+	int	x_size;
+	int	y_size;
+	int	i_pt;
+	int	j_pt;
+}			t_map_size;
+
 typedef struct s_pt
 {
-	int	z;
+	long	z;
 	int	color;
 }			t_pt;
 
 typedef struct s_map
 {
-	t_pt	**pts;
+	t_pt	**pt;
 	int	height;
 	int	*width;
+	int	y_lines;
 }			t_map;
 
-typedef struct s_split
+//typedef struct s_split
+
 //parse_1
-int	have_color(const char *str);
-long	get_z(const char *str);
-int	get_color(const char	*color_str);
+//int	have_color(const char *str);
+//long	get_z(const char *str);
+//int	get_color(const char	*color_str);
 
 #endif
