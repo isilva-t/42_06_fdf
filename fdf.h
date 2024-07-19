@@ -25,13 +25,12 @@
 
 # include <stdio.h> //remove before submission
 
-typedef struct s_map_size
+typedef struct s_iterator
 {
-	int	x_size;
-	int	y_size;
-	int	i_pt;
-	int	j_pt;
-}			t_map_size;
+	int	x;
+	int	y;
+	int	x_zc;
+}			t_iterator;
 
 typedef struct s_pt
 {
@@ -46,7 +45,10 @@ typedef struct s_map
 	int		*width;
 	int		y_lines;
 	int		fd1;
+	char	**lines;
 	char	*big_str;
+	char	**points;
+	char	**info_point;
 	int		have_error;
 }			t_map;
 

@@ -47,10 +47,16 @@ static int	get_len(const char *s, char c)
 
 void	ft_free_split_mem(int *in_word, char **array)
 {
-	while (*in_word >= 0)
+	int	i;
+
+	if (in_word)
+		i = *in_word;
+	else
+		i = -1;
+	while (i >= 0)
 	{
-		free(*(array + *in_word));
-		*in_word -= 1;
+		free(*(array + i));
+		i--;
 	}
 	free(array);
 }
