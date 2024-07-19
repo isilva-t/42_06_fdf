@@ -55,58 +55,81 @@ void	populate_point(t_map *map, t_iterator *i)
 {
 	i->x_zc = 0;
 	map->info_point = ft_my_split(map->points[i->x], ',', &i->x_zc);
-			get_z(map->info_point[0], map, &i->y, &i->x);
-			if (i->x_zc == 2)
-				get_color(map->info_point[1], map, &i->y, &i->x);
-			else
-				map->pt[i->y][i->x].color = 0xffffff;
-			if (map->pt[i->y][i->x].z < INT_MIN
-				|| map->pt[i->y][i->x].z > INT_MAX
-				|| map->pt[i->y][i->x].color == 0xf000000)
-				map->have_error = 1;
-			ft_free_split_mem(&i->x_zc, map->info_point);
-
+	get_z(map->info_point[0], map, &i->y, &i->x);
+	if (i->x_zc == 2)
+		get_color(map->info_point[1], map, &i->y, &i->x);
+	else
+		map->pt[i->y][i->x].color = 0xffffff;
+	if (map->pt[i->y][i->x].z < INT_MIN
+		|| map->pt[i->y][i->x].z > INT_MAX
+		|| map->pt[i->y][i->x].color == 0xf000000)
+		map->have_error = 1;
+	ft_free_split_mem(&i->x_zc, map->info_point);
 }
 
-int	populate_map(t_map *map)
+void	populate_map(t_map *map)
 {
 	t_iterator	i;
 
 	map->have_error = 0;
 	if (!map || !map->lines)
-		return (0);
-	map->pt = (t_pt **)ft_calloc(sizeof(t_pt *), map->y_lines + 1);
+		return ;
+	map->pt = (t_pt **)ft_calloc(sizeof(t_pt *), map->height + 1);
 	i.y = -1;
 	while (map->lines[++i.y])
 	{
 		map->width[i.y] = 0;
 		map->points = ft_my_split(map->lines[i.y], ' ', &map->width[i.y]);
 		map->pt[i.y] = (t_pt *)ft_calloc(sizeof(t_pt), map->width[i.y]);
-		
 		i.x = -1;
 		while (map->points[++i.x])
-		{
 			populate_point(map, &i);
-/////
-			/*
-			i.x_zc = 0;
-			map->info_point = ft_my_split(map->points[i.x], ',', &i.x_zc);
-			get_z(map->info_point[0], map, &i.y, &i.x);
-			if (i.x_zc == 2)
-				get_color(map->info_point[1], map, &i.y, &i.x);
-			else
-				map->pt[i.y][i.x].color = 0xffffff;
-			if (map->pt[i.y][i.x].z < INT_MIN
-				|| map->pt[i.y][i.x].z > INT_MAX
-				|| map->pt[i.y][i.x].color == 0xf000000)
-				map->have_error = 1;
-			ft_free_split_mem(&i.x_zc, map->info_point);*/
-	///////////////////
-		}
-
 		ft_free_split_mem(&i.x, map->points);
 	}
-	return (map->have_error);
+	if (map->have_error == 1)
+		ft_printf("Error! Wrong data in map! (3)\n");
+	else
+		print_created_map(map, 1);
+	return ;
+}
+
+void	init_map_vars(t_map *map)
+{
+	map->have_error = 0;
+	map->fd_lines = 0;
+	map->width = 0;
+	map->height = 0;
+	map->get_map_ok = 0;
+	return ;
+}
+
+void	get_map(t_map *map, char *av)
+{
+	make_big_str(av, map, "");
+	if (!map->big_str)
+	{
+		ft_printf("Error reading file! Please check! (2)\n");
+		return ;
+	}
+	if (map->fd_lines > 0)
+		map->width = (int *)ft_calloc(sizeof(int), map->fd_lines);
+	map->lines = ft_my_split(map->big_str, '\n', &map->height);
+	if (map->big_str)
+		free (map->big_str);
+	populate_map(map);
+	ft_free_split_mem(&map->height, map->lines);
+	map->get_map_ok = 1;
+}
+
+void	free_stuff(t_map *map)
+{
+	if (map->get_map_ok == 1)
+	{
+		while (map->height >= 0)
+			free (map->pt[map->height--]);
+		free (map->pt);
+		free (map->width);
+	}
 }
 
 int	main(int ac, char **av)
@@ -115,38 +138,15 @@ int	main(int ac, char **av)
 
 	if (ac < 2 || ac > 2 || (ac == 2 && !av[1][0]))
 	{
-		ft_printf("Error, please check! (1)\n");
+		ft_printf("Error! Do you have a file? (1)\n");
 		return (1);
 	}
 	if (ac == 2)
 	{
-		map.have_error = 0;
-		map.height = 0;
-		map.width = 0;
-		map.y_lines = 0;
-		make_big_array(av[1], &map, "");
-		if (!map.big_str)
-			ft_printf("Error, please check! (2)\n");
-		if (map.height > 0)
-			map.width = (int *)ft_calloc(sizeof(int), map.height);
-		map.lines = ft_my_split(map.big_str, '\n', &map.y_lines);
-		free (map.big_str);
-		map.have_error = populate_map(&map);
-		if (map.have_error == 1)
-			ft_printf("Error, please check! (3)\n");
-		else
-		{
-			print_created_map(&map, 1);
-			ft_printf("\033[0;36m\nmap.width[0]: %d\nmap.height: %d\n\033[0m", map.width[0], map.height);
-		}
-		/////////////////////////////////////////////
-		ft_free_split_mem(&map.y_lines, map.lines);
-		while (map.y_lines >= 0)
-			free (map.pt[map.y_lines--]);
-		free (map.pt);
-		free (map.width);
-		/////////////////////////////////////////////
-		ft_printf("______________________________________________\n");
+		init_map_vars(&map);
+		get_map(&map, av[1]);
+		free_stuff(&map);
+		ft_printf("_______________________________________________________\n");
 	}
 	return (0);
 }

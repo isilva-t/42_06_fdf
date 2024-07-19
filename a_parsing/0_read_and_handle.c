@@ -24,7 +24,7 @@ int	have_color(const char *str)
 	return (1);
 }
 
-void	make_big_array(char *av, t_map *map, char *line)
+void	make_big_str(char *av, t_map *map, char *line)
 {
 	char	*tmp_to_free;
 
@@ -46,7 +46,7 @@ void	make_big_array(char *av, t_map *map, char *line)
 		map->big_str = ft_strjoin(map->big_str, line);
 		free (tmp_to_free);
 		free (line);
-		map->height += 1;
+		map->fd_lines += 1;
 	}
 	close(map->fd1);
 	return ;
@@ -55,7 +55,7 @@ void	make_big_array(char *av, t_map *map, char *line)
 void	print_created_map(t_map *map, int i)
 {
 	auto int x = 0, y = 0;
-	while (y < map->height && i == 1)
+	while (y < map->fd_lines && i == 1)
 	{
 		ft_printf("\n");
 		x = 0;
@@ -67,5 +67,6 @@ void	print_created_map(t_map *map, int i)
 		}
 		y++;
 	}
+	ft_printf("\033[0;36m\nmap.width[0]: %d\nmap.height: %d\n\033[0m", map->width[0], map->fd_lines);
 	return ;
 }

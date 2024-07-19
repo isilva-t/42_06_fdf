@@ -43,8 +43,9 @@ typedef struct s_map
 	t_pt	**pt;
 	int		height;
 	int		*width;
-	int		y_lines;
+	int		fd_lines;
 	int		fd1;
+	int		get_map_ok;
 	char	**lines;
 	char	*big_str;
 	char	**points;
@@ -54,7 +55,7 @@ typedef struct s_map
 
 //a_parsing
 int		have_color(const char *str);
-void	make_big_array(char *av, t_map *map, char *line);
+void	make_big_str(char *av, t_map *map, char *line);
 void	print_created_map(t_map *map, int i);
 //long	get_z(const char *str);
 //int	get_color(const char	*color_str);
