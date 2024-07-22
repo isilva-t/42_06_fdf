@@ -37,7 +37,7 @@ all: $(NAME)
 
 $(NAME):
 	@make -C $(LIBFT_DIR)
-	@$(CC) ${CFLAGS} $(SRCS) $(LIBFT) $(FT_PRINTF) -o $(NAME)
+	@$(CC) ${CFLAGS} $(SRCS) $(MLX) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 	$(MSG1)
 
 clean:

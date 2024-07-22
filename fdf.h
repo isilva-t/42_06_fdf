@@ -13,7 +13,7 @@
 #ifndef FDF_H
 # define FDF_H
 
-# include "minilibx-linux/mlx.h"
+# include "./minilibx-linux/mlx.h"
 # include <X11/keysym.h>
 # include "./libs/libft/libft.h"
 # include "./libs/ft_printf/ft_printf.h"
@@ -48,6 +48,8 @@ typedef struct s_pt
 typedef struct s_map
 {
 	t_pt	**pt;
+	int		y_sc;
+	int		x_sc;
 	int		height;
 	int		*width;
 	int		fd_lines;
