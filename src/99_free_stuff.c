@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   99_free_stuff.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isilva-t <isilva-t@students.42porto.com>   +#+  +:+       +#+        */
+/*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 12:15:14 by isilva-t          #+#    #+#             */
-/*   Updated: 2024/04/24 12:32:41 by isilva-t         ###   ########.fr       */
+/*   Created: 2024/07/22 11:53:24 by isilva-t          #+#    #+#             */
+/*   Updated: 2024/07/22 11:54:02 by isilva-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../fdf.h"
 
-void	ft_putchar_fd(char c, int fd)
+void	free_stuff(t_map *map)
 {
-	write(fd, &c, 1);
+	if (map->get_map_ok == TRUE)
+	{
+		while (map->height >= 0)
+			free (map->pt[map->height--]);
+		free (map->pt);
+		free (map->width);
+	}
 }

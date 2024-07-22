@@ -60,14 +60,16 @@ typedef struct s_map
 	int		have_error;
 }			t_map;
 
-//a_parsing
+//00_read_and_handle
 int		have_color(const char *str);
 void	make_big_str(char *av, t_map *map, char *line);
 void	print_created_map(t_map *map, int i);
 void	init_map_vars(t_map *map);
-// get_map
+//01_get_map
 void	get_map(t_map *map, char *av);
-//long	get_z(const char *str);
-//int	get_color(const char	*color_str);
+
+// 99_free_stuff
+void	free_stuff(t_map *map);
+
 
 #endif

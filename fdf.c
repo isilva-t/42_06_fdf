@@ -12,16 +12,6 @@
 
 #include "fdf.h"
 
-void	free_stuff(t_map *map)
-{
-	if (map->get_map_ok == TRUE)
-	{
-		while (map->height >= 0)
-			free (map->pt[map->height--]);
-		free (map->pt);
-		free (map->width);
-	}
-}
 
 int	main(int ac, char **av)
 {
