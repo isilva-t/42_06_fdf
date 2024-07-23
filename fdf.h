@@ -32,6 +32,14 @@
 # define FALSE 0
 # define INVALID -1
 
+# ifndef PRINT
+#  define PRINT 0
+# endif
+
+# define WIDTH	400
+# define HEIGHT	400
+# define SIDE_LEN	400
+
 typedef struct s_iterator
 {
 	int	x;
@@ -62,13 +70,34 @@ typedef struct s_map
 	int		have_error;
 }			t_map;
 
+typedef struct s_img
+{
+	void	*img_ptr;
+	char	*img_px_ptr;
+	int		bits_per_px;
+	int		endian;
+	int		line_len;
+}			t_img;
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	t_img	img;
+	t_map	*map;
+	int		x;
+	int		y;
+	int		sum_x;
+	int		sum_y;
+}			t_mlx;
+
 //00_read_and_handle
 int		have_color(const char *str);
 void	make_big_str(char *av, t_map *map, char *line);
 void	print_created_map(t_map *map, int i);
 void	init_map_vars(t_map *map);
 //01_get_map
-void	get_map(t_map *map, char *av);
+void	get_map(t_map *map, char *av, t_mlx *d);
 
 // 99_free_stuff
 void	free_stuff(t_map *map);

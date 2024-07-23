@@ -88,11 +88,11 @@ static void	populate_map(t_map *map)
 	if (map->have_error == TRUE)
 		ft_printf("Error! Wrong data in map! (3)\n");
 	else
-		print_created_map(map, 1);
+		print_created_map(map, PRINT);
 	return ;
 }
 
-void	get_map(t_map *map, char *av)
+void	get_map(t_map *map, char *av, t_mlx *d)
 {
 	make_big_str(av, map, "");
 	if (!map->big_str)
@@ -107,5 +107,6 @@ void	get_map(t_map *map, char *av)
 		free (map->big_str);
 	populate_map(map);
 	ft_free_split_mem(&map->height, map->lines);
+	d->map = map;
 	map->get_map_ok = TRUE;
 }
