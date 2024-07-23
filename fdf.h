@@ -36,9 +36,12 @@
 #  define PRINT 0
 # endif
 
-# define WIDTH	400
-# define HEIGHT	400
-# define SIDE_LEN	400
+# define WIDTH	600
+# define X_MIN	50
+# define X_MAX	550
+# define HEIGHT	500
+# define Y_MIN	50
+# define Y_MAX	450
 
 typedef struct s_iterator
 {

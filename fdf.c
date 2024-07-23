@@ -12,8 +12,8 @@
 
 #include "fdf.h"
 
-# define BORDER_Y 50
-# define BORDER_X 50
+
+
 
 t_iterator	set_i(int n)
 {
@@ -46,13 +46,11 @@ void	color_screen(t_mlx *d, int color)
 {
 	t_iterator	i;
 
-	i = set_i(0);
-	i.x += BORDER_X;
-	i.y += BORDER_Y;
-	while (++i.y < SIDE_LEN - BORDER_Y)
+	i.y = Y_MIN;
+	while (++i.y < Y_MAX)
 	{
-		i.x = 0 + BORDER_X;
-		while (++i.x < SIDE_LEN - BORDER_X)
+		i.x = X_MIN;
+		while (++i.x < X_MAX)
 		{
 			my_pixel_put(&d->img, i, color);
 		}
@@ -88,7 +86,7 @@ void	do_mlx_stuff(t_mlx *d)
 			free_stuff(d->map);
 			return ;
 		}
-		d->img.img_ptr = mlx_new_image(d->mlx, SIDE_LEN, SIDE_LEN);
+		d->img.img_ptr = mlx_new_image(d->mlx, WIDTH, HEIGHT);
 		d->img.img_px_ptr = mlx_get_data_addr(d->img.img_ptr, &d->img.bits_per_px, &d->img.line_len, &d->img.endian);
 
 		mlx_key_hook(d->win, handle_input, d);
