@@ -52,6 +52,8 @@ typedef struct s_iterator
 
 typedef struct s_pt
 {
+	int		x;
+	int		y;
 	long	z;
 	int		color;
 }			t_pt;
