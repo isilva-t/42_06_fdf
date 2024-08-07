@@ -75,8 +75,8 @@ typedef struct s_map
 
 typedef struct s_img
 {
-	void	*img_ptr;
-	char	*img_px_ptr;
+	void	*img_p;
+	char	*img_px_p;
 	int		bits_per_px;
 	int		endian;
 	int		line_len;
