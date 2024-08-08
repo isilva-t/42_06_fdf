@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   99_free_stuff.c                                    :+:      :+:    :+:   */
+/*   95_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 11:53:24 by isilva-t          #+#    #+#             */
-/*   Updated: 2024/08/08 15:33:29 by isilva-t         ###   ########.fr       */
+/*   Created: 2024/08/08 11:24:18 by isilva-t          #+#    #+#             */
+/*   Updated: 2024/08/08 12:12:25 by isilva-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-void	free_stuff(t_map *map)
+t_iterator	set_i(int n)
 {
-	if (map->get_map_ok == TRUE)
-	{
-		while (map->height >= 0)
-		{
-		ft_printf("free_stuff\n");
-			free (map->pt[map->height--]);
-		}
-		free (map->pt);
-		free (map->width);
-	}
+	t_iterator	i;
+
+	i.x = n;
+	i.y = n;
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 10:46:52 by isilva-t          #+#    #+#             */
-/*   Updated: 2024/07/22 10:50:00 by isilva-t         ###   ########.fr       */
+/*   Updated: 2024/08/08 16:00:01 by isilva-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ static void	populate_point(t_map *map, t_iterator *i)
 		|| map->pt[i->y][i->x].color == 0xf000000)
 		map->have_error = TRUE;
 	ft_free_split_mem(&i->x_zc, map->info_point);
-	map->pt[i->y][i->x].x = i->x;
-	map->pt[i->y][i->x].y = i->y;
+	//map->pt[i->y][i->x].x = i->x;
+	//map->pt[i->y][i->x].y = i->y;
 }
 
 static void	populate_map(t_map *map)
@@ -81,7 +81,7 @@ static void	populate_map(t_map *map)
 	{
 		map->width[i.y] = 0;
 		map->points = ft_my_split(map->lines[i.y], ' ', &map->width[i.y]);
-		map->pt[i.y] = (t_pt *)ft_calloc(sizeof(t_pt), map->width[i.y]);
+		map->pt[i.y] = (t_pt *)ft_calloc(sizeof(t_pt), map->width[i.y] + 1);
 		i.x = -1;
 		while (map->points[++i.x])
 			populate_point(map, &i);
@@ -97,7 +97,7 @@ static void	populate_map(t_map *map)
 void	get_map(t_map *map, char *av, t_mlx *d)
 {
 	make_big_str(av, map, "");
-	if (!map->big_str)
+	if (!map->big_str || map->fd_lines == 0)
 	{
 		ft_printf("Error reading file! Please check! (2)\n");
 		return ;
@@ -110,5 +110,6 @@ void	get_map(t_map *map, char *av, t_mlx *d)
 	populate_map(map);
 	ft_free_split_mem(&map->height, map->lines);
 	d->map = map;
-	map->get_map_ok = TRUE;
+	if (map->have_error == FALSE)
+		map->get_map_ok = TRUE;
 }

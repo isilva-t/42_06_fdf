@@ -28,6 +28,7 @@ NAME = fdf
 SRCS = $(GNL) fdf.c \
 	./src/00_read_and_handle.c \
 	./src/01_get_map.c \
+	./src/50_do_mlx_stuff.c \
 	./src/99_free_stuff.c
 
 OBJS = ${SRCS:.c=.o}

@@ -6,7 +6,7 @@
 /*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 10:53:39 by isilva-t          #+#    #+#             */
-/*   Updated: 2024/07/22 10:53:43 by isilva-t         ###   ########.fr       */
+/*   Updated: 2024/08/08 13:43:37 by isilva-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@ void	init_map_vars(t_map *map)
 {
 	map->have_error = FALSE;
 	map->fd_lines = 0;
-	map->width = 0;
 	map->height = 0;
+	map->width = 0;
+	map->max_width = 0;
 	map->get_map_ok = FALSE;
-	map->y_sc = 0;
-	map->y_sc = 0;
+	//map->y_sc = 0;
+	//map->y_sc = 0;
 	return ;
 }
 

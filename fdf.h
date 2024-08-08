@@ -6,7 +6,7 @@
 /*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:21:19 by isilva-t          #+#    #+#             */
-/*   Updated: 2024/07/17 17:19:43 by username         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:41:43 by isilva-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define WIDTH	600
 # define X_MIN	50
 # define X_MAX	550
-# define HEIGHT	500
+# define HEIGHT	400
 # define Y_MIN	50
 # define Y_MAX	450
 
@@ -61,10 +61,12 @@ typedef struct s_pt
 typedef struct s_map
 {
 	t_pt	**pt;
-	int		y_sc;
-	int		x_sc;
+	int		offset_p2p;
+//	int		y_sc;
+//	int		x_sc;
 	int		height;
 	int		*width;
+	int		max_width;
 	int		fd_lines;
 	int		fd1;
 	int		get_map_ok;
@@ -103,6 +105,12 @@ void	print_created_map(t_map *map, int i);
 void	init_map_vars(t_map *map);
 //01_get_map
 void	get_map(t_map *map, char *av, t_mlx *d);
+
+// 50_do_mlx_stuff
+void	do_mlx_stuff(t_mlx *d);
+
+// 95_utils
+t_iterator	set_i(int n);
 
 // 99_free_stuff
 void	free_stuff(t_map *map);
