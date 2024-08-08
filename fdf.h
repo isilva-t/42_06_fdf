@@ -6,7 +6,7 @@
 /*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:21:19 by isilva-t          #+#    #+#             */
-/*   Updated: 2024/08/08 14:41:43 by isilva-t         ###   ########.fr       */
+/*   Updated: 2024/08/08 18:07:45 by isilva-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <math.h>
 
 # include <stdio.h> //remove before submission
 
@@ -39,7 +40,7 @@
 # define WIDTH	600
 # define X_MIN	50
 # define X_MAX	550
-# define HEIGHT	400
+# define HEIGHT	500
 # define Y_MIN	50
 # define Y_MAX	450
 

@@ -6,7 +6,7 @@
 /*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 11:16:57 by isilva-t          #+#    #+#             */
-/*   Updated: 2024/08/08 15:04:24 by isilva-t         ###   ########.fr       */
+/*   Updated: 2024/08/08 16:46:02 by isilva-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	handle_input(int key, t_mlx *d)
 		color_screen(d, 0x00ff00);
 		ft_printf("key %d pressed\n", key);
 	}
-	else if (key == XK_b)
+	else if (key == XK_w)
 	{
-		color_screen(d, 0x0000ff);
+		color_screen(d, 0xffffff);
 		ft_printf("key %d pressed\n", key);
 	}
 	else if (key == XK_Escape)
@@ -102,6 +102,9 @@ void	do_mlx_stuff(t_mlx *d)
 	d->img.img_px_p = mlx_get_data_addr(d->img.img_p, &d->img.bits_per_px, &d->img.line_len, &d->img.endian);
 
 	//mlx_mouse_hook(d->win, mouse_hook, d);
+	
+	color_screen(d, 0xffffff);
+	mlx_put_image_to_window(d->mlx, d->win, d->img.img_p, 0, 0);
 	mlx_key_hook(d->win, handle_input, d);
 
 	mlx_loop(d->mlx);
