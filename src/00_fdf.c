@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf.h"
 
 void	get_max_width(t_map *map)
 {
@@ -86,7 +86,9 @@ void	center_map(t_map *map)
 
 	if (!map || map->have_error ==TRUE)
 		return ;
-	offset_x = ((WIDTH - (abs(map->pt[0][map->width[0]].x) - abs(map->pt[map->height - 1][0].x))) / 2);
+	offset_x = abs(map->pt[0][map->width[0]].x) - abs(map->pt[map->height - 1][0].x);
+	//offset_y = 
+	offset_x = (WIDTH - offset_x) / 2;
 	offset_y = ((HEIGHT - (abs(map->pt[map->height - 1][map->width[map->height - 1]].y) - abs(map->pt[0][0].y))) / 2);
 	i.y = -1;
 	while (++i.y < map->height)

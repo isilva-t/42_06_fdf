@@ -18,7 +18,6 @@ void	free_stuff(t_map *map)
 	{
 		while (map->height >= 0)
 		{
-		ft_printf("free_stuff\n");
 			free (map->pt[map->height--]);
 		}
 		free (map->pt);

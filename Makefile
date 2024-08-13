@@ -25,9 +25,9 @@ FT_PRINTF = ./libs/ft_printf/ft_printf.c \
 MLX = -Lminilibx-linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz -O3
 NAME = fdf
 
-SRCS = $(GNL) fdf.c \
-	./src/00_read_and_handle.c \
-	./src/01_get_map.c \
+SRCS = $(GNL) ./src/00_fdf.c \
+	./src/01_read_and_handle.c \
+	./src/02_get_map.c \
 	./src/50_do_mlx_stuff.c \
 	./src/99_free_stuff.c
 
