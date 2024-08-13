@@ -37,10 +37,10 @@
 #  define PRINT 0
 # endif
 
-# define WIDTH	600
+# define WIDTH	1920
 # define X_MIN	50
 # define X_MAX	550
-# define HEIGHT	500
+# define HEIGHT	1080
 # define Y_MIN	50
 # define Y_MAX	450
 
@@ -68,6 +68,10 @@ typedef struct s_map
 	int		height;
 	int		*width;
 	int		max_width;
+	t_pt		max_x;
+	t_pt		max_y;
+	t_pt		min_x;
+	t_pt		min_y;
 	int		fd_lines;
 	int		fd1;
 	int		get_map_ok;

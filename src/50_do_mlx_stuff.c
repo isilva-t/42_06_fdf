@@ -66,14 +66,14 @@ void	draw_horizontal_line(t_mlx *d, t_iterator i)
 			actual.y += 1;
 			new_px_put(&d->img, actual, 0xffff00);
 		}
-		else if (decision < 0)
+		else if (decision <= 0)
 		{
 			decision += 2 * delta_y;
 			actual.x += 1;
 			new_px_put(&d->img, actual, 0xffff00);
 		}
-		else
-			break ;
+		//else
+		//	break ;
 	}
 }
 
@@ -88,7 +88,6 @@ void	draw_vertical_line(t_mlx *d, t_iterator i)
 	actual.y = d->map->pt[i.y + 1][i.x].y;
 	next.x = d->map->pt[i.y][i.x].x;
 	next.y = d->map->pt[i.y][i.x].y;
-	ft_printf("actual %d _ %d\nnext %d _ %d\n", actual.x, actual.y, next.x, next.y);
 	//step1
 	delta_x = next.x - actual.x;
 	delta_y = actual.y - next.y;
@@ -104,14 +103,14 @@ void	draw_vertical_line(t_mlx *d, t_iterator i)
 			actual.y -= 1;
 			new_px_put(&d->img, actual, 0x00ffff);
 		}
-		else if (decision < 0)
+		else if (decision <= 0)
 		{
 			decision += 2 * delta_y;
 			actual.x += 1;
 			new_px_put(&d->img, actual, 0x00ffff);
 		}
-		else
-			break ;
+		//else
+		//	break ;
 	}
 
 }

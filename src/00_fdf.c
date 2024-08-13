@@ -30,8 +30,16 @@ void	set_offset_p2p(t_map *map)
 	int	offset_p2p_x;
 	int	offset_p2p_y;
 
-	offset_p2p_x = WIDTH / (map->max_width - 1);
-	offset_p2p_y = HEIGHT / (map->height - 1);
+	if (!map)
+		return ;
+	if (map->width[0] > 1)
+		offset_p2p_x = WIDTH / (map->max_width - 1);
+	else
+		offset_p2p_x = WIDTH;
+	if (map->height > 1)
+		offset_p2p_y = HEIGHT / (map->height - 1);
+	else
+		offset_p2p_y = HEIGHT;
 	if (offset_p2p_x < 5 || offset_p2p_y < 5)
 		map->have_error = TRUE;
 	if (offset_p2p_x < offset_p2p_y)
@@ -78,6 +86,52 @@ void	apply_isometric(t_map *map)
 	}
 }
 
+void	set_max_cords(t_map *map)
+{
+	t_iterator	i;
+
+	if (!map || !map->pt || !map->pt[0])
+		return ;
+	map->max_x = map->pt[0][0];
+	map->max_y = map->pt[0][0];
+	i.y = -1;
+	while (++i.y < map->height)
+	{
+		i.x = -1;
+		while (++i.x < map->width[i.y])
+		{
+			if (map->pt[i.y][i.x].x > map->max_x.x)
+				map->max_x = map->pt[i.y][i.x];
+			if (map->pt[i.y][i.x].y > map->max_y.y)
+				map->max_y = map->pt[i.y][i.x];
+		}
+	}
+	return ;
+}
+
+void	set_min_cords(t_map *map)
+{
+	t_iterator	i;
+
+	if (!map || !map->pt || !map->pt[0])
+		return ;
+	map->min_x = map->pt[0][0];
+	map->min_y = map->pt[0][0];
+	i.y = -1;
+	while (++i.y < map->height)
+	{
+		i.x = -1;
+		while (++i.x < map->width[i.y])
+		{
+			if (map->pt[i.y][i.x].x < map->min_x.x)
+				map->min_x = map->pt[i.y][i.x];
+			if (map->pt[i.y][i.x].y < map->min_y.y)
+				map->min_y = map->pt[i.y][i.x];
+		}
+	}
+	return ;
+}
+
 void	center_map(t_map *map)
 {
 	t_iterator i;
@@ -86,10 +140,12 @@ void	center_map(t_map *map)
 
 	if (!map || map->have_error ==TRUE)
 		return ;
-	offset_x = abs(map->pt[0][map->width[0]].x) - abs(map->pt[map->height - 1][0].x);
-	//offset_y = 
+	set_max_cords(map);
+	set_min_cords(map);
+	offset_x = abs(map->max_x.x) - abs(map->min_x.x);
+	offset_y = abs(map->max_y.y) - abs(map->min_y.y); 
 	offset_x = (WIDTH - offset_x) / 2;
-	offset_y = ((HEIGHT - (abs(map->pt[map->height - 1][map->width[map->height - 1]].y) - abs(map->pt[0][0].y))) / 2);
+	offset_y = (HEIGHT - offset_y) / 2;
 	i.y = -1;
 	while (++i.y < map->height)
 	{
