@@ -61,12 +61,14 @@ typedef struct s_pt
 
 typedef struct s_ln_pt
 {
+// vars for draw_line algorithm
 	int		delta_x;
 	int		delta_y;
 	int		x_direction;
 	int		y_direction;
 	int		err;
 	int		e2;
+// colors for draw_line
 	int		actual_red;
 	int		actual_green;
 	int		actual_blue;
@@ -76,6 +78,7 @@ typedef struct s_ln_pt
 	int		delta_color;
 	int		delta_z;
 	int		color;
+// color limits for set color based on z
 	int		min_red;
 	int		min_green;
 	int		min_blue;
@@ -87,6 +90,7 @@ typedef struct s_ln_pt
 	int		step_blue;
 	t_pt	min_z;
 	t_pt	max_z;
+// points to use on draw_line
 	t_pt	actual;
 	t_pt	next;
 }			t_ln_pt;
@@ -95,8 +99,6 @@ typedef struct s_map
 {
 	t_pt	**pt;
 	int		offset_p2p;
-//	int		y_sc;
-//	int		x_sc;
 	int		height;
 	int		*width;
 	int		max_width;
