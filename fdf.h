@@ -37,10 +37,10 @@
 #  define PRINT 0
 # endif
 
-# define WIDTH	1920
+# define WIDTH	1024
 # define X_MIN	50
 # define X_MAX	550
-# define HEIGHT	1080
+# define HEIGHT	800
 # define Y_MIN	50
 # define Y_MAX	450
 
@@ -58,6 +58,18 @@ typedef struct s_pt
 	long	z;
 	int		color;
 }			t_pt;
+
+typedef struct s_ln_pt
+{
+	int	delta_x;
+	int	delta_y;
+	int	x_direction;
+	int	y_direction;
+	int	err;
+	int	e2;
+	t_pt	actual;
+	t_pt	next;
+}			t_ln_pt;
 
 typedef struct s_map
 {
