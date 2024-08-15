@@ -1,6 +1,6 @@
 #include "../fdf.h"
 
-void	my_px_put(t_img *img, t_pt pt, int color)
+static void	my_px_put(t_img *img, t_pt pt, int color)
 {
 	int	offset;
 
@@ -8,7 +8,7 @@ void	my_px_put(t_img *img, t_pt pt, int color)
 	*((unsigned int *)(offset + img->img_px_p)) = color;
 }
 
-void	set_delta_color(t_ln_pt *data)
+static void	set_delta_color(t_ln_pt *data)
 {
 	int	delta_x;
 	int	delta_y;
@@ -21,7 +21,7 @@ void	set_delta_color(t_ln_pt *data)
 		data->delta_color = delta_y;
 }
 
-void	set_color_on_point(t_ln_pt *data)
+static void	set_color_on_point(t_ln_pt *data)
 {
 	data->actual_red = (data->actual.color >> 16) & 0xFF;
 	data->actual_green = (data->actual.color >> 8) & 0xFF;
@@ -39,7 +39,7 @@ void	set_color_on_point(t_ln_pt *data)
 	data->actual.color = get_rgb_color(data);
 }
 
-void	set_data_to_draw_line(t_ln_pt *data)
+static void	set_data_to_draw_line(t_ln_pt *data)
 {
 	if (!data)
 		return ;

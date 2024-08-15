@@ -12,7 +12,7 @@
 
 #include "../fdf.h"
 
-int	free_mlx(t_mlx *d)
+static int	free_mlx(t_mlx *d)
 {
 	mlx_destroy_image(d->mlx, d->img.img_p);
 	mlx_destroy_window(d->mlx, d->win);
@@ -21,7 +21,7 @@ int	free_mlx(t_mlx *d)
 	return (1);
 }
 
-int	only_have_white(t_map *map)
+static int	only_have_white(t_map *map)
 {
 	t_iterator	i;
 
@@ -38,7 +38,7 @@ int	only_have_white(t_map *map)
 	return (TRUE);
 }
 
-void	map_to_screen(t_mlx *d, int color)
+static void	map_to_screen(t_mlx *d, int color)
 {
 	t_iterator	i;
 
@@ -61,7 +61,7 @@ void	map_to_screen(t_mlx *d, int color)
 	}
 }
 
-int	handle_input(int key, t_mlx *d)
+static int	handle_input(int key, t_mlx *d)
 {
 	if (key == XK_r)
 	{
