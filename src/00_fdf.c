@@ -33,11 +33,11 @@ void	set_offset_p2p(t_map *map)
 	if (!map || map->have_error == TRUE)
 		return ;
 	if (map->width[0] > 1)
-		offset_p2p_x = WIDTH / (map->max_width );
+		offset_p2p_x = WIDTH / (map->max_width);
 	else
 		offset_p2p_x = WIDTH;
 	if (map->height > 1)
-		offset_p2p_y = HEIGHT / (map->height );
+		offset_p2p_y = HEIGHT / (map->height);
 	else
 		offset_p2p_y = HEIGHT;
 	if (offset_p2p_x < 5 || offset_p2p_y < 5)
@@ -52,7 +52,7 @@ void	apply_offset_p2p(t_map *map)
 {
 	t_iterator	i;
 
-	if (!map || map->have_error ==TRUE)
+	if (!map || map->have_error == TRUE)
 		return ;
 	i.y = -1;
 	while (++i.y < map->height)
@@ -68,10 +68,10 @@ void	apply_offset_p2p(t_map *map)
 
 void	apply_isometric(t_map *map)
 {
-	t_iterator i;
-	int		tmp;
+	t_iterator	i;
+	int			tmp;
 
-	if (!map || map->have_error ==TRUE)
+	if (!map || map->have_error == TRUE)
 		return ;
 	i.y = -1;
 	while (++i.y < map->height)
@@ -80,8 +80,10 @@ void	apply_isometric(t_map *map)
 		while (++i.x <= map->width[i.y])
 		{
 			tmp = map->pt[i.y][i.x].x;
-			map->pt[i.y][i.x].x = (tmp - map->pt[i.y][i.x].y) * cos(0.523599);
-			map->pt[i.y][i.x].y = (tmp + map->pt[i.y][i.x].y) * sin(0.523599) - (map->pt[i.y][i.x].z * 1);
+			map->pt[i.y][i.x].x = (tmp - map->pt[i.y][i.x].y)
+				* cos(0.523599);
+			map->pt[i.y][i.x].y = (tmp + map->pt[i.y][i.x].y)
+				* sin(0.523599) - (map->pt[i.y][i.x].z * 1);
 		}
 	}
 }
@@ -90,7 +92,7 @@ void	set_max_cords(t_map *map)
 {
 	t_iterator	i;
 
-	if (!map || !map->pt || !map->pt[0] || map->have_error ==TRUE)
+	if (!map || !map->pt || !map->pt[0] || map->have_error == TRUE)
 		return ;
 	map->max_x = map->pt[0][0];
 	map->max_y = map->pt[0][0];
@@ -113,7 +115,7 @@ void	set_min_cords(t_map *map)
 {
 	t_iterator	i;
 
-	if (!map || !map->pt || !map->pt[0] || map->have_error ==TRUE)
+	if (!map || !map->pt || !map->pt[0] || map->have_error == TRUE)
 		return ;
 	map->min_x = map->pt[0][0];
 	map->min_y = map->pt[0][0];
@@ -134,16 +136,16 @@ void	set_min_cords(t_map *map)
 
 void	center_map(t_map *map)
 {
-	t_iterator i;
-	int		offset_x;
-	int		offset_y;
+	t_iterator	i;
+	int			offset_x;
+	int			offset_y;
 
-	if (!map || map->have_error ==TRUE)
+	if (!map || map->have_error == TRUE)
 		return ;
 	set_max_cords(map);
 	set_min_cords(map);
 	offset_x = abs(map->max_x.x) - abs(map->min_x.x);
-	offset_y = abs(map->max_y.y) - abs(map->min_y.y); 
+	offset_y = abs(map->max_y.y) - abs(map->min_y.y);
 	offset_x = (WIDTH - offset_x) / 2;
 	offset_y = (HEIGHT - offset_y) / 2;
 	i.y = -1;
@@ -172,7 +174,6 @@ int	main(int ac, char **av)
 	{
 		init_map_vars(&map);
 		get_map(&map, av[1], &d);
-
 		if (map.get_map_ok == TRUE)
 		{
 			get_max_width(&map);

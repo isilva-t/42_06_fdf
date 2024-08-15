@@ -64,8 +64,6 @@ static void	populate_point(t_map *map, t_iterator *i)
 		|| map->pt[i->y][i->x].color == 0xf000000)
 		map->have_error = TRUE;
 	ft_free_split_mem(&i->x_zc, map->info_point);
-	//map->pt[i->y][i->x].x = i->x;
-	//map->pt[i->y][i->x].y = i->y;
 }
 
 static void	populate_map(t_map *map)

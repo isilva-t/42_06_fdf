@@ -28,6 +28,9 @@ NAME = fdf
 SRCS = $(GNL) ./src/00_fdf.c \
 	./src/01_read_and_handle.c \
 	./src/02_get_map.c \
+	./src/10_set_color_based_on_z.c \
+	./src/15_draw_line.c \
+	./src/95_utils.c \
 	./src/50_do_mlx_stuff.c \
 	./src/99_free_stuff.c
 

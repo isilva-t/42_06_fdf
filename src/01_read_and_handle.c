@@ -20,8 +20,6 @@ void	init_map_vars(t_map *map)
 	map->width = 0;
 	map->max_width = 0;
 	map->get_map_ok = FALSE;
-	//map->y_sc = 0;
-	//map->y_sc = 0;
 	return ;
 }
 

@@ -61,12 +61,32 @@ typedef struct s_pt
 
 typedef struct s_ln_pt
 {
-	int	delta_x;
-	int	delta_y;
-	int	x_direction;
-	int	y_direction;
-	int	err;
-	int	e2;
+	int		delta_x;
+	int		delta_y;
+	int		x_direction;
+	int		y_direction;
+	int		err;
+	int		e2;
+	int		actual_red;
+	int		actual_green;
+	int		actual_blue;
+	int		next_red;
+	int		next_green;
+	int		next_blue;
+	int		delta_color;
+	int		delta_z;
+	int		color;
+	int		min_red;
+	int		min_green;
+	int		min_blue;
+	int		max_red;
+	int		max_green;
+	int		max_blue;
+	int		step_red;
+	int		step_green;
+	int		step_blue;
+	t_pt	min_z;
+	t_pt	max_z;
 	t_pt	actual;
 	t_pt	next;
 }			t_ln_pt;
@@ -80,10 +100,12 @@ typedef struct s_map
 	int		height;
 	int		*width;
 	int		max_width;
-	t_pt		max_x;
-	t_pt		max_y;
-	t_pt		min_x;
-	t_pt		min_y;
+	t_pt	max_x;
+	t_pt	max_y;
+	t_pt	min_x;
+	t_pt	min_y;
+	t_pt	max_z;
+	t_pt	min_z;
 	int		fd_lines;
 	int		fd1;
 	int		get_map_ok;
@@ -115,22 +137,29 @@ typedef struct s_mlx
 	int		sum_y;
 }			t_mlx;
 
-//00_read_and_handle
-int		have_color(const char *str);
-void	make_big_str(char *av, t_map *map, char *line);
-void	print_created_map(t_map *map, int i);
-void	init_map_vars(t_map *map);
-//01_get_map
-void	get_map(t_map *map, char *av, t_mlx *d);
+// 00_read_and_handle
+int			have_color(const char *str);
+void		make_big_str(char *av, t_map *map, char *line);
+void		print_created_map(t_map *map, int i);
+void		init_map_vars(t_map *map);
+
+// 01_get_map
+void		get_map(t_map *map, char *av, t_mlx *d);
+
+// 10_set_color_based_on_z
+void		set_color_based_on_z(t_map *map);
+
+// 15_draw_line
+void		draw_line(t_mlx *d, t_iterator i, int x_sum, int y_sum);
 
 // 50_do_mlx_stuff
-void	do_mlx_stuff(t_mlx *d);
+void		do_mlx_stuff(t_mlx *d);
 
 // 95_utils
 t_iterator	set_i(int n);
+int			get_rgb_color(t_ln_pt *data);
 
 // 99_free_stuff
-void	free_stuff(t_map *map);
-
+void		free_stuff(t_map *map);
 
 #endif

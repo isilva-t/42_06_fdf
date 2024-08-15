@@ -21,67 +21,29 @@ int	free_mlx(t_mlx *d)
 	return (1);
 }
 
-void	my_pixel_put(t_img *img, t_iterator *i, t_map *map, int color)
+int	only_have_white(t_map *map)
 {
-	int	offset;
+	t_iterator	i;
 
-	offset = (img->line_len * map->pt[i->y][i->x].y) + (map->pt[i->y][i->x].x * (img->bits_per_px / 8));
-
-	*((unsigned int *)(offset + img->img_px_p)) = color;
-}
-
-void	new_px_put(t_img *img, t_pt pt, int color)
-{
-	int	offset;
-
-	offset = (img->line_len * pt.y) + (pt.x * (img->bits_per_px / 8));
-
-	*((unsigned int *)(offset + img->img_px_p)) = color;
-
-}
-
-void	set_data_to_draw_line(t_ln_pt *data)
-{
-	data->x_direction = -1;
-	if (data->actual.x < data->next.x)
-		data->x_direction = 1;
-	data->y_direction = -1;
-	if (data->actual.y < data->next.y)
-		data->y_direction = 1;
-	data->delta_x = abs(data->next.x - data->actual.x);
-	data->delta_y = abs(data->next.y - data->actual.y);
-	data->err = data->delta_x - data->delta_y;
-}
-
-void	draw_line(t_mlx *d, t_iterator i, int x_sum, int y_sum)
-{
-	t_ln_pt	data;
-
-	data.actual = d->map->pt[i.y + y_sum][i.x];
-	data.next = d->map->pt[i.y][i.x + x_sum];
-	set_data_to_draw_line(&data);
-	new_px_put(&d->img, data.actual, data.actual.color);
-	while (data.actual.x != data.next.x || data.actual.y != data.next.y)
+	i.y = -1;
+	while (++i.y < map->height)
 	{
-		data.e2 = 2 * data.err;
-		if (data.e2 > -data.delta_y)
+		i.x = -1;
+		while (++i.x < map->width[i.y])
 		{
-			data.err -= data.delta_y;
-			data.actual.x += data.x_direction;
+			if (map->pt[i.y][i.x].color != 0xffffff)
+				return (FALSE);
 		}
-		if (data.e2 < data.delta_x)
-		{
-			data.err += data.delta_x;
-			data.actual.y += data.y_direction;
-		}
-		new_px_put(&d->img, data.actual, data.actual.color);
 	}
+	return (TRUE);
 }
 
 void	map_to_screen(t_mlx *d, int color)
 {
 	t_iterator	i;
 
+	if (only_have_white(d->map) == TRUE)
+		set_color_based_on_z(d->map);
 	color += color - color;
 	i.y = 0;
 	while (i.y < d->map->height)
@@ -98,7 +60,6 @@ void	map_to_screen(t_mlx *d, int color)
 		i.y++;
 	}
 }
-
 
 int	handle_input(int key, t_mlx *d)
 {
@@ -142,6 +103,7 @@ int	mouse_hook(int mkey, t_mlx *d)
 	return (0);
 }*/
 //mlx_mouse_hook(d->win, mouse_hook, d);
+
 void	do_mlx_stuff(t_mlx *d)
 {
 	if (d->map->get_map_ok == FALSE)
@@ -157,12 +119,11 @@ void	do_mlx_stuff(t_mlx *d)
 	}
 	d->img.img_p = mlx_new_image(d->mlx, WIDTH, HEIGHT);
 	d->img.img_px_p = mlx_get_data_addr(d->img.img_p,
-									 &d->img.bits_per_px,
-									 &d->img.line_len,
-										&d->img.endian);
+			&d->img.bits_per_px,
+			&d->img.line_len,
+			&d->img.endian);
 	map_to_screen(d, 0xffffff);
 	mlx_put_image_to_window(d->mlx, d->win, d->img.img_p, 0, 0);
 	mlx_key_hook(d->win, handle_input, d);
-
 	mlx_loop(d->mlx);
 }

@@ -20,3 +20,13 @@ t_iterator	set_i(int n)
 	i.y = n;
 	return (i);
 }
+
+int	get_rgb_color(t_ln_pt *data)
+{
+	int	color;
+
+	color = ((data->actual_red << 16)
+			| (data->actual_green << 8)
+			| data->actual_blue);
+	return (color);
+}
