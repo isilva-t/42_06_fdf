@@ -74,10 +74,10 @@ void	make_big_str(char *av, t_map *map, char *line)
 	return ;
 }
 
-void	print_created_map(t_map *map, int i)
+void	print_created_map(t_map *map, int c, int d)
 {
 	auto int x = 0, y = 0;
-	while (y < map->fd_lines && i == TRUE)
+	while (y < map->fd_lines && c == TRUE)
 	{
 		ft_printf("\n");
 		x = 0;
@@ -89,8 +89,11 @@ void	print_created_map(t_map *map, int i)
 		}
 		y++;
 	}
-	if (i == TRUE)
-		ft_printf("%s\nmap.width[0]: %d\nmap.height: %d%s", \
+	if (d == TRUE)
+	{
+		ft_printf("%s\nmap.width[0]: %d\nmap.height: %d%s\n", \
 			T_CYAN, map->width[0], map->fd_lines, T_DEF);
-	return ;
+		ft_printf("HEIGHT ^: %d, WIDTH >: %d\n", HEIGHT, WIDTH);
+
+	}
 }

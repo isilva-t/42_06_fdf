@@ -21,7 +21,7 @@ static int	free_mlx(t_mlx *d)
 	return (1);
 }
 
-static int	only_have_white(t_map *map)
+int	only_have_white(t_map *map)
 {
 	t_iterator	i;
 
@@ -41,7 +41,6 @@ static int	only_have_white(t_map *map)
 static void	map_to_screen(t_mlx *d, int color)
 {
 	t_iterator	i;
-
 	if (only_have_white(d->map) == TRUE)
 		set_color_based_on_z(d->map);
 	color += color - color;

@@ -30,3 +30,9 @@ int	get_rgb_color(t_ln_pt *data)
 			| data->actual_blue);
 	return (color);
 }
+
+void	is_the_point_inside_window(t_map *map, t_pt pt)
+{
+	if (pt.x >= WIDTH || pt.y >= HEIGHT)
+		map->have_error = TRUE;
+}

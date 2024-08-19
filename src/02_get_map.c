@@ -59,8 +59,8 @@ static void	populate_point(t_map *map, t_iterator *i)
 		get_color(map->info_point[1], map, &i->y, &i->x);
 	else
 		map->pt[i->y][i->x].color = 0xffffff;
-	if (map->pt[i->y][i->x].z < INT_MIN
-		|| map->pt[i->y][i->x].z > INT_MAX
+	if (map->pt[i->y][i->x].z < MIN_Z_ALLOWED
+		|| map->pt[i->y][i->x].z > MAX_Z_ALLOWED
 		|| map->pt[i->y][i->x].color == 0xf000000)
 		map->have_error = TRUE;
 	ft_free_split_mem(&i->x_zc, map->info_point);
@@ -88,7 +88,7 @@ static void	populate_map(t_map *map)
 	if (map->have_error == TRUE)
 		ft_printf("Error! Wrong data in map! (3)\n");
 	else
-		print_created_map(map, PRINT);
+		print_created_map(map, PRINT_COORDS, PRINT_DIMENSIONS);
 	return ;
 }
 

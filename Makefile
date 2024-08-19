@@ -44,10 +44,16 @@ $(NAME):
 	@$(CC) ${CFLAGS} $(SRCS) $(MLX) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 	$(MSG1)
 	
-t: 
+c: 
 	@make -C $(LIBFT_DIR)
-	@$(CC) ${CFLAGS} $(SRCS) -D PRINT=1 $(MLX) $(LIBFT) $(FT_PRINTF) -o $(NAME)
+	@$(CC) ${CFLAGS} $(SRCS) -D PRINT_COORDS=1 $(MLX) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 	$(MSG1)
+
+d: 
+	@make -C $(LIBFT_DIR)
+	@$(CC) ${CFLAGS} $(SRCS) -D PRINT_DIMENSIONS=1 $(MLX) $(LIBFT) $(FT_PRINTF) -o $(NAME)
+	$(MSG1)
+
 
 clean:
 	@make clean -C $(LIBFT_DIR)

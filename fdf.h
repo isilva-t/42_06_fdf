@@ -33,16 +33,28 @@
 # define FALSE 0
 # define INVALID -1
 
-# ifndef PRINT
-#  define PRINT 0
+# ifndef PRINT_COORDS
+#  define PRINT_COORDS 0
 # endif
 
-# define WIDTH	1024
-# define X_MIN	50
-# define X_MAX	550
-# define HEIGHT	800
-# define Y_MIN	50
-# define Y_MAX	450
+# ifndef PRINT_DIMENSIONS
+#  define PRINT_DIMENSIONS 0
+# endif
+
+# define TEST	ft_printf("TEST\n");
+# define TEST2	ft_printf("TEST_2\n");
+# define TEST3	ft_printf("TEST_3\n");
+# define TEST4	ft_printf("TEST_4\n");
+# define TEST5	ft_printf("TEST_5\n");
+
+# define WIDTH	1200
+# define HEIGHT	900
+# define MIN_Z_ALLOWED -68
+# define MAX_Z_ALLOWED 253
+//# define X_MIN	50
+//# define X_MAX	550
+//# define Y_MIN	50
+//# define Y_MAX	450
 
 typedef struct s_iterator
 {
@@ -98,7 +110,7 @@ typedef struct s_ln_pt
 typedef struct s_map
 {
 	t_pt	**pt;
-	int		offset_p2p;
+	float		offset_p2p;
 	int		height;
 	int		*width;
 	int		max_width;
@@ -142,7 +154,7 @@ typedef struct s_mlx
 // 00_read_and_handle
 int			have_color(const char *str);
 void		make_big_str(char *av, t_map *map, char *line);
-void		print_created_map(t_map *map, int i);
+void		print_created_map(t_map *map, int c, int d);
 void		init_map_vars(t_map *map);
 
 // 01_get_map
@@ -160,6 +172,7 @@ void		do_mlx_stuff(t_mlx *d);
 // 95_utils
 t_iterator	set_i(int n);
 int			get_rgb_color(t_ln_pt *data);
+void	is_the_point_inside_window(t_map *map, t_pt pt);
 
 // 99_free_stuff
 void		free_stuff(t_map *map);

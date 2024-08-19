@@ -20,6 +20,8 @@ static void	set_z_min_and_max(t_map *map, t_ln_pt *data)
 	}
 	data->min_z = map->min_z;
 	data->max_z = map->max_z;
+	ft_printf("map_min_z.z %d\n", map->min_z.z);
+	ft_printf("map_max_z.z %d\n", map->max_z.z);
 }
 
 static void	set_min_and_max_z_color(t_ln_pt *data)
@@ -34,14 +36,16 @@ static void	set_min_and_max_z_color(t_ln_pt *data)
 	data->max_blue = data->max_z.color & 0xFF;
 }
 
-static void	set_color_z_based(t_map *map, t_ln_pt *data)
+void	set_color_z_based(t_map *map, t_ln_pt *data)
 {
 	t_iterator	i;
 	int			z_fact;
 
-	data->step_red = (data->max_red - data->min_red) / data->delta_z;
-	data->step_green = (data->max_green - data->min_green) / data->delta_z;
-	data->step_blue = (data->max_blue - data->min_blue) / data->delta_z;
+	if (data->min_z.z == data->max_z.z)
+		return ;
+	data->step_red = ((data->max_red - data->min_red) / data->delta_z);
+	data->step_green = ((data->max_green - data->min_green) / data->delta_z);
+	data->step_blue = ((data->max_blue - data->min_blue) / data->delta_z);
 	i.y = 0;
 	while (i.y < map->height)
 	{
@@ -81,7 +85,6 @@ static void	set_color_limits(t_ln_pt *data)
 void	set_color_based_on_z(t_map *map)
 {
 	t_ln_pt	data;
-
 	set_z_min_and_max(map, &data);
 	set_color_limits(&data);
 	data.delta_z = abs((int)data.max_z.z - (int)data.min_z.z);
