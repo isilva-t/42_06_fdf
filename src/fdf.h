@@ -42,13 +42,14 @@
 #  define PRINT_DIMENSIONS 0
 # endif
 
+# define PI 3.14
 # define WIDTH	1200
 # define HEIGHT	900
 # define MIN_Z_ALLOWED -68
 # define MAX_Z_ALLOWED 253
 # define X_BORDER	60
 # define Y_BORDER	40
-# define Z_FACTOR 1
+# define Z_FACTOR 2
 
 typedef struct s_iterator
 {
@@ -104,7 +105,8 @@ typedef struct s_ln_pt
 typedef struct s_map
 {
 	t_pt	**pt;
-	int		offset_p2p;
+	float	offset_p2p;
+	float	z_factor;
 	int		height;
 	int		*width;
 	int		max_width;
