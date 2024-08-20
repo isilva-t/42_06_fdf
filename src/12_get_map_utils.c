@@ -1,16 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_read_and_handle.c                               :+:      :+:    :+:   */
+/*   12_get_map_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 10:53:39 by isilva-t          #+#    #+#             */
-/*   Updated: 2024/08/08 13:43:37 by isilva-t         ###   ########.fr       */
+/*   Created: 2024/08/20 16:51:10 by isilva-t          #+#    #+#             */
+/*   Updated: 2024/08/20 16:52:54 by isilva-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fdf.h"
+#include "fdf.h"
+
+void	init_map_vars(t_map *map);
+int		have_color(const char *str);
+void	make_big_str(char *av, t_map *map, char *line);
 
 void	init_map_vars(t_map *map)
 {
@@ -72,28 +76,4 @@ void	make_big_str(char *av, t_map *map, char *line)
 	}
 	close(map->fd1);
 	return ;
-}
-
-void	print_created_map(t_map *map, int c, int d)
-{
-	auto int x = 0, y = 0;
-	while (y < map->fd_lines && c == TRUE)
-	{
-		ft_printf("\n");
-		x = 0;
-		while (x < map->width[y])
-		{
-			ft_printf("%s%d%s%d\033[0m ", T_DEF, \
-			map->pt[y][x].z, T_BROWN, map->pt[y][x].color);
-			x++;
-		}
-		y++;
-	}
-	if (d == TRUE)
-	{
-		ft_printf("%s\nmap.width[0]: %d\nmap.height: %d%s\n", \
-			T_CYAN, map->width[0], map->fd_lines, T_DEF);
-		ft_printf("HEIGHT ^: %d, WIDTH >: %d\n", HEIGHT, WIDTH);
-
-	}
 }

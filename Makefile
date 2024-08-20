@@ -26,41 +26,45 @@ MLX = -Lminilibx-linux -lmlx_Linux -Imlx_linux -lXext -lX11 -lm -lz -O3
 NAME = fdf
 
 SRCS = $(GNL) ./src/00_fdf.c \
-	./src/01_read_and_handle.c \
-	./src/02_get_map.c \
-	./src/10_set_color_based_on_z.c \
-	./src/15_draw_line.c \
-	./src/95_utils.c \
-	./src/50_do_mlx_stuff.c \
+	./src/11_get_map.c \
+	./src/12_get_map_utils.c \
+	./src/21_get_map_ready_to_show.c \
+	./src/22_set_limits.c \
+	./src/31_do_mlx_stuff.c \
+	./src/32_set_color_based_on_z.c \
+	./src/33_draw_line.c \
+	./src/88_utils.c \
 	./src/99_free_stuff.c
 
 OBJS = ${SRCS:.c=.o}
+MSG0 = @echo "Compiling..."
 MSG1 = @echo "_________________________________________________________________ Compiled!"
 
 all: $(NAME)
 
 $(NAME):
-	@make -C $(LIBFT_DIR)
+	$(MSG0);
+	@make -C $(LIBFT_DIR) --silent
 	@$(CC) ${CFLAGS} $(SRCS) $(MLX) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 	$(MSG1)
 	
 c: 
-	@make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR) --silent
 	@$(CC) ${CFLAGS} $(SRCS) -D PRINT_COORDS=1 $(MLX) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 	$(MSG1)
 
 d: 
-	@make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR) --silent
 	@$(CC) ${CFLAGS} $(SRCS) -D PRINT_DIMENSIONS=1 $(MLX) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 	$(MSG1)
 
 
 clean:
-	@make clean -C $(LIBFT_DIR)
+	@make clean -C $(LIBFT_DIR) --silent
 	@rm -rf ${OBJS}
 
 fclean: clean
-	@make fclean -C $(LIBFT_DIR)
+	@make fclean -C $(LIBFT_DIR) --silent
 	@rm -rf ${NAME}
 
 re: fclean all

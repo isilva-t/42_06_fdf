@@ -6,18 +6,19 @@
 /*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 09:21:19 by isilva-t          #+#    #+#             */
-/*   Updated: 2024/08/08 18:07:45 by isilva-t         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:58:35 by isilva-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "./minilibx-linux/mlx.h"
+# include ".././minilibx-linux/mlx.h"
+# include ".././minilibx-linux/mlx_int.h"
 # include <X11/keysym.h>
-# include "./libs/libft/libft.h"
-# include "./libs/ft_printf/ft_printf.h"
-# include "./libs/gnl/get_next_line.h"
+# include ".././libs/libft/libft.h"
+# include ".././libs/ft_printf/ft_printf.h"
+# include ".././libs/gnl/get_next_line.h"
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -41,20 +42,12 @@
 #  define PRINT_DIMENSIONS 0
 # endif
 
-# define TEST	ft_printf("TEST\n");
-# define TEST2	ft_printf("TEST_2\n");
-# define TEST3	ft_printf("TEST_3\n");
-# define TEST4	ft_printf("TEST_4\n");
-# define TEST5	ft_printf("TEST_5\n");
-
 # define WIDTH	1200
 # define HEIGHT	900
 # define MIN_Z_ALLOWED -68
 # define MAX_Z_ALLOWED 253
-//# define X_MIN	50
-//# define X_MAX	550
-//# define Y_MIN	50
-//# define Y_MAX	450
+# define X_BORDER	60
+# define Y_BORDER	40
 
 typedef struct s_iterator
 {
@@ -110,16 +103,16 @@ typedef struct s_ln_pt
 typedef struct s_map
 {
 	t_pt	**pt;
-	float		offset_p2p;
+	int		offset_p2p;
 	int		height;
 	int		*width;
 	int		max_width;
-	t_pt	max_x;
-	t_pt	max_y;
 	t_pt	min_x;
+	t_pt	max_x;
 	t_pt	min_y;
-	t_pt	max_z;
+	t_pt	max_y;
 	t_pt	min_z;
+	t_pt	max_z;
 	int		fd_lines;
 	int		fd1;
 	int		get_map_ok;
@@ -130,20 +123,20 @@ typedef struct s_map
 	int		have_error;
 }			t_map;
 
-typedef struct s_img
+typedef struct s_imgs
 {
 	void	*img_p;
 	char	*img_px_p;
 	int		bits_per_px;
 	int		endian;
 	int		line_len;
-}			t_img;
+}			t_imgs;
 
 typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
-	t_img	img;
+	t_imgs	img;
 	t_map	*map;
 	int		x;
 	int		y;
@@ -154,11 +147,17 @@ typedef struct s_mlx
 // 00_read_and_handle
 int			have_color(const char *str);
 void		make_big_str(char *av, t_map *map, char *line);
-void		print_created_map(t_map *map, int c, int d);
 void		init_map_vars(t_map *map);
 
 // 01_get_map
 void		get_map(t_map *map, char *av, t_mlx *d);
+
+// 06_set_limits
+void		get_max_width(t_map *map);
+void		set_min_and_max_xy(t_map *map);
+
+// 09_get_map_ready_to_show
+void		get_map_ready_to_show(t_map *map);
 
 // 10_set_color_based_on_z
 void		set_color_based_on_z(t_map *map);
@@ -167,12 +166,14 @@ void		set_color_based_on_z(t_map *map);
 void		draw_line(t_mlx *d, t_iterator i, int x_sum, int y_sum);
 
 // 50_do_mlx_stuff
-void		do_mlx_stuff(t_mlx *d);
+void		do_mlx_stuff_and_show_map(t_mlx *d);
 
 // 95_utils
 t_iterator	set_i(int n);
 int			get_rgb_color(t_ln_pt *data);
-void	is_the_point_inside_window(t_map *map, t_pt pt);
+int			only_have_white(t_map *map);
+int			is_fdf_file(char *av);
+void		print_created_map(t_map *map, int c, int d);
 
 // 99_free_stuff
 void		free_stuff(t_map *map);

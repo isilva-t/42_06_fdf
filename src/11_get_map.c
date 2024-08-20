@@ -1,16 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   01_get_map.c                                       :+:      :+:    :+:   */
+/*   11_get_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 10:46:52 by isilva-t          #+#    #+#             */
-/*   Updated: 2024/08/08 16:00:01 by isilva-t         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:57:15 by isilva-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fdf.h"
+#include "fdf.h"
+
+void		get_map(t_map *map, char *av, t_mlx *d);
+static void	get_z(const char *str, t_map *map, int *y, int *x);
+static void	get_color(const char *color_str, t_map *map,
+				int *y, int *x);
+static void	populate_point(t_map *map, t_iterator *i);
+static void	populate_map(t_map *map);
+
+void	get_map(t_map *map, char *av, t_mlx *d)
+{
+	make_big_str(av, map, "");
+	if (!map->big_str || map->fd_lines == 0)
+	{
+		ft_printf("Error reading file! Please check! (2)\n");
+		return ;
+	}
+	if (map->fd_lines > 0)
+		map->width = (int *)ft_calloc(sizeof(int), map->fd_lines);
+	map->lines = ft_my_split(map->big_str, '\n', &map->height);
+	if (map->big_str)
+		free (map->big_str);
+	populate_map(map);
+	ft_free_split_mem(&map->height, map->lines);
+	d->map = map;
+	if (map->have_error == FALSE)
+		map->get_map_ok = TRUE;
+}
 
 static void	get_z(const char *str, t_map *map, int *y, int *x)
 {
@@ -32,7 +59,6 @@ static void	get_z(const char *str, t_map *map, int *y, int *x)
 			return ;
 	}
 	map->pt[*y][*x].z = ft_atol(str);
-	return ;
 }
 
 static void	get_color(const char *color_str, t_map *map,
@@ -47,7 +73,6 @@ static void	get_color(const char *color_str, t_map *map,
 	else
 		color = 0xffffff;
 	map->pt[*y][*x].color = color;
-	return ;
 }
 
 static void	populate_point(t_map *map, t_iterator *i)
@@ -59,8 +84,8 @@ static void	populate_point(t_map *map, t_iterator *i)
 		get_color(map->info_point[1], map, &i->y, &i->x);
 	else
 		map->pt[i->y][i->x].color = 0xffffff;
-	if (map->pt[i->y][i->x].z < MIN_Z_ALLOWED
-		|| map->pt[i->y][i->x].z > MAX_Z_ALLOWED
+	if (map->pt[i->y][i->x].z > INT_MAX - 1
+		|| map->pt[i->y][i->x].z < INT_MIN + 1
 		|| map->pt[i->y][i->x].color == 0xf000000)
 		map->have_error = TRUE;
 	ft_free_split_mem(&i->x_zc, map->info_point);
@@ -89,25 +114,4 @@ static void	populate_map(t_map *map)
 		ft_printf("Error! Wrong data in map! (3)\n");
 	else
 		print_created_map(map, PRINT_COORDS, PRINT_DIMENSIONS);
-	return ;
-}
-
-void	get_map(t_map *map, char *av, t_mlx *d)
-{
-	make_big_str(av, map, "");
-	if (!map->big_str || map->fd_lines == 0)
-	{
-		ft_printf("Error reading file! Please check! (2)\n");
-		return ;
-	}
-	if (map->fd_lines > 0)
-		map->width = (int *)ft_calloc(sizeof(int), map->fd_lines);
-	map->lines = ft_my_split(map->big_str, '\n', &map->height);
-	if (map->big_str)
-		free (map->big_str);
-	populate_map(map);
-	ft_free_split_mem(&map->height, map->lines);
-	d->map = map;
-	if (map->have_error == FALSE)
-		map->get_map_ok = TRUE;
 }
