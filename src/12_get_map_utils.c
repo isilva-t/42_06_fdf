@@ -14,7 +14,7 @@
 
 void	init_map_vars(t_map *map);
 int		have_color(const char *str);
-void	make_big_str(char *av, t_map *map, char *line);
+void	make_big_str(char *av, t_map *map, char *line, char *tmp_to_free);
 
 void	init_map_vars(t_map *map)
 {
@@ -50,13 +50,14 @@ int	have_color(const char *str)
 	return (TRUE);
 }
 
-void	make_big_str(char *av, t_map *map, char *line)
+void	make_big_str(char *av, t_map *map, char *line, char *tmp_to_free)
 {
-	char	*tmp_to_free;
-
 	map->fd1 = open(av, O_RDONLY);
 	if (map->fd1 < 0)
+	{
+		map->have_error = TRUE;
 		return ;
+	}
 	map->big_str = (char *)ft_calloc(1, sizeof(char) + 1);
 	if (!map->big_str)
 		return ;
@@ -75,5 +76,4 @@ void	make_big_str(char *av, t_map *map, char *line)
 		map->fd_lines += 1;
 	}
 	close(map->fd1);
-	return ;
 }

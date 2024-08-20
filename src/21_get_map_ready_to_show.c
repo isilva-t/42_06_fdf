@@ -41,11 +41,11 @@ static void	set_offset_p2p(t_map *map)
 	if (!map || map->have_error == TRUE)
 		return ;
 	if (map->width[0] > 1)
-		offset_p2p_x = ((WIDTH - 1) / (map->max_width - 2));
+		offset_p2p_x = ((WIDTH - 1) / (map->max_width - 1));
 	else
 		offset_p2p_x = WIDTH - X_BORDER;
 	if (map->height > 1)
-		offset_p2p_y /= (map->height - 2);
+		offset_p2p_y /= (map->height - 1);
 	else
 		offset_p2p_y -= Y_BORDER;
 	if (offset_p2p_x < offset_p2p_y)
@@ -91,7 +91,7 @@ static void	apply_isometric(t_map *map)
 			map->pt[i.y][i.x].x = (tmp - map->pt[i.y][i.x].y)
 				* cos(0.523599);
 			map->pt[i.y][i.x].y = (tmp + map->pt[i.y][i.x].y)
-				* sin(0.523599) - (map->pt[i.y][i.x].z * 1);
+				* sin(0.523599) - (map->pt[i.y][i.x].z * Z_FACTOR);
 		}
 	}
 }

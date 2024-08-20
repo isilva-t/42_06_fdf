@@ -12,15 +12,15 @@
 
 #include "fdf.h"
 
-void			do_mlx_stuff_and_show_map(t_mlx *d);
+void			do_mlx_stuff_and_show_map(t_mlx *d, t_map *map);
 static int		free_mlx(t_mlx *d);
 static int		clean_exit(t_mlx *d);
 static void		map_to_mlx_array(t_mlx *d);
 static int		handle_input(int key, t_mlx *d);
 
-void	do_mlx_stuff_and_show_map(t_mlx *d)
+void	do_mlx_stuff_and_show_map(t_mlx *d, t_map *map)
 {
-	if (d->map->get_map_ok == FALSE || d->map->have_error == TRUE)
+	if (map->get_map_ok == FALSE || map->have_error == TRUE || map->fd1 < 1)
 		return ;
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, WIDTH, HEIGHT, "FDF");

@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 			init_map_vars(&map);
 			get_map(&map, av[1], &d);
 			get_map_ready_to_show(&map);
-			do_mlx_stuff_and_show_map(&d);
+			do_mlx_stuff_and_show_map(&d, &map);
 			free_stuff(&map);
 		}
 		else

@@ -14,14 +14,22 @@
 
 void	free_stuff(t_map *map)
 {
-	if (map->get_map_ok == TRUE
-		|| (map->get_map_ok == FALSE && map->have_error == TRUE))
+	if (map->get_map_ok == TRUE)
 	{
 		while (map->height >= 0)
-		{
 			free (map->pt[map->height--]);
-		}
 		free (map->pt);
+		free (map->width);
+	}
+	if (map->get_map_ok == FALSE && map->have_error == TRUE && map->fd1 > 0)
+	{
+		while (map->height >= 0)
+			free (map->pt[map->height--]);
+		free (map->pt);
+		free (map->width);
+	}
+	if (map->fd1 < 0)
+	{
 		free (map->width);
 	}
 }

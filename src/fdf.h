@@ -48,6 +48,7 @@
 # define MAX_Z_ALLOWED 253
 # define X_BORDER	60
 # define Y_BORDER	40
+# define Z_FACTOR 1
 
 typedef struct s_iterator
 {
@@ -146,7 +147,7 @@ typedef struct s_mlx
 
 // 00_read_and_handle
 int			have_color(const char *str);
-void		make_big_str(char *av, t_map *map, char *line);
+void		make_big_str(char *av, t_map *map, char *line, char *tmp_to_free);
 void		init_map_vars(t_map *map);
 
 // 01_get_map
@@ -166,7 +167,7 @@ void		set_color_based_on_z(t_map *map);
 void		draw_line(t_mlx *d, t_iterator i, int x_sum, int y_sum);
 
 // 50_do_mlx_stuff
-void		do_mlx_stuff_and_show_map(t_mlx *d);
+void		do_mlx_stuff_and_show_map(t_mlx *d, t_map *map);
 
 // 95_utils
 t_iterator	set_i(int n);
