@@ -21,7 +21,7 @@ static void	populate_map(t_map *map);
 void	get_map(t_map *map, char *av, t_mlx *d)
 {
 	make_big_str(av, map, "", NULL);
-	if (!map->big_str || map->fd_lines == 0)
+	if (map->have_error == TRUE || !map->big_str || map->fd_lines == 0)
 	{
 		ft_printf("Error reading file! Please check! (2)\n");
 		return ;
