@@ -54,6 +54,7 @@ mini:
 	wget https://cdn.intra.42.fr/document/document/27219/minilibx-linux.tgz
 	tar xf minilibx-linux.tgz
 	rm -rf minilibx-linux.tgz
+	rm -rf minilibx-linux/.git
 	
 maps:
 	wget https://cdn.intra.42.fr/document/document/27216/maps.zip
