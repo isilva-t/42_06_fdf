@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ift_atoi_base.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isilva-t <isilva-t@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/21 14:53:38 by isilva-t          #+#    #+#             */
+/*   Updated: 2024/08/21 14:59:14 by isilva-t         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
 int	ft_valid(char c, int base)
 {
-	char	base1[17] = "0123456789abcdef";
-	char 	base2[17] = "0123456789ABCDEF";
-	
+	auto char base1[17] = "0123456789abcdef";
+	auto char base2[17] = "0123456789ABCDEF";
 	while (base--)
-	{	
+	{
 		if (c == base1[base] || c == base2[base])
 			return (1);
 	}
@@ -26,9 +37,8 @@ int	ft_value(char c)
 
 int	ft_atoi_base(const char *str, int str_base)
 {
-	int	result = 0;
-	int	signal = 1;
-
+	auto int result = 0;
+	auto int signal = 1;
 	while (*str <= 32)
 		str++;
 	if (*str == '-' || *str == '+')

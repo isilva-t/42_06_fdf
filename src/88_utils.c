@@ -59,6 +59,8 @@ int	is_fdf_file(char *av)
 	int	len;
 
 	len = ft_strlen(av);
+	if (len <= 4)
+		return (FALSE);
 	if (av[len - 4] == '.'
 		&& av[len - 3] == 'f'
 		&& av[len - 2] == 'd'

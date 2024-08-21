@@ -12,11 +12,13 @@
 
 #include "fdf.h"
 
-void		set_min_and_max_xy(t_map *map);
+void		set_min_and_max_xyz(t_map *map);
 void		get_max_width(t_map *map);
+void		set_z_factor(t_map *map);
 static void	init_min_and_max_cords(t_map *map);
+static void	get_diagonal(t_map *map);
 
-void	set_min_and_max_xy(t_map *map)
+void	set_min_and_max_xyz(t_map *map)
 {
 	t_iterator	i;
 
@@ -58,6 +60,34 @@ void	get_max_width(t_map *map)
 			map->max_width = map->width[i];
 }
 
+void	set_z_factor(t_map *map)
+{
+	get_diagonal(map);
+	map->z_factor = (abs(((int)map->max_z.z - (int)map->min_z.z)));
+	if (map->z_factor + map->diagonal >= 600)
+		map->z_factor = 0.1;
+	else if (map->z_factor + map->diagonal >= 350)
+		map->z_factor = 0.3;
+	else if (map->z_factor + map->diagonal >= 150)
+		map->z_factor = 0.5;
+	else if (map->z_factor + map->diagonal >= 77)
+		map->z_factor = 1;
+	else if (map->z_factor + map->diagonal >= 77)
+		map->z_factor = 1;
+	else if (map->z_factor + map->diagonal >= 55)
+		map->z_factor = 2;
+	else if (map->z_factor + map->diagonal >= 30)
+		map->z_factor = 3;
+	else if (map->z_factor + map->diagonal >= 20)
+		map->z_factor = 4;
+	else if (map->z_factor + map->diagonal >= 13)
+		map->z_factor = 5;
+	else if (map->z_factor + map->diagonal >= 7)
+		map->z_factor = 6;
+	else
+		map->z_factor = 7;
+}
+
 static void	init_min_and_max_cords(t_map *map)
 {
 	if (!map || !map->pt[0])
@@ -68,4 +98,23 @@ static void	init_min_and_max_cords(t_map *map)
 	map->min_y = map->pt[0][0];
 	map->min_z = map->pt[0][0];
 	map->max_z = map->pt[0][0];
+}
+
+static void	get_diagonal(t_map *map)
+{
+	int	diagonal_power_2;
+
+	diagonal_power_2 = (map->max_width * map->max_width)
+		+ (map->height * map->height);
+	map->diagonal = 1;
+	while (map->diagonal * map->diagonal < diagonal_power_2
+		&& map->diagonal <= 46340)
+	{
+		map->diagonal++;
+		if (map->diagonal * map->diagonal > diagonal_power_2)
+		{
+			map->diagonal--;
+			break ;
+		}
+	}
 }

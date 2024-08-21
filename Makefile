@@ -13,6 +13,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
+MLX_DIR = ./minilibx-linux/
 LIBFT_DIR = ./libs/libft/
 LIBFT = ./libs/libft/libft.a
 
@@ -44,9 +45,23 @@ all: $(NAME)
 
 $(NAME):
 	$(MSG0);
+	@make -C $(MLX_DIR) --silent	
 	@make -C $(LIBFT_DIR) --silent
 	@$(CC) ${CFLAGS} $(SRCS) $(MLX) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 	$(MSG1)
+	
+mini:
+	wget https://cdn.intra.42.fr/document/document/27219/minilibx-linux.tgz
+	tar xf minilibx-linux.tgz
+	rm -rf minilibx-linux.tgz
+	
+maps:
+	wget https://cdn.intra.42.fr/document/document/27216/maps.zip
+	unzip maps.zip
+	rm -rf maps.zip
+	rm -rf __MACOSX
+	
+
 	
 c: 
 	@make -C $(LIBFT_DIR) --silent
@@ -69,4 +84,4 @@ fclean: clean
 
 re: fclean all
 ret: fclean t
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re mini

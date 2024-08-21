@@ -14,8 +14,7 @@
 
 void		get_map(t_map *map, char *av, t_mlx *d);
 static void	get_z(const char *str, t_map *map, int *y, int *x);
-static void	get_color(const char *color_str, t_map *map,
-				int *y, int *x);
+static void	get_color(const char *color_str, t_map *map, int *y, int *x);
 static void	populate_point(t_map *map, t_iterator *i);
 static void	populate_map(t_map *map);
 

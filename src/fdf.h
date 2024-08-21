@@ -25,14 +25,18 @@
 # include <limits.h>
 # include <math.h>
 
-# include <stdio.h> //remove before submission
+# define TRUE 1
+# define FALSE 0
+# define INVALID -1
+
+# define WIDTH	1200
+# define HEIGHT	900
+# define X_BORDER	60
+# define Y_BORDER	40
 
 # define T_DEF "\033[0m"
 # define T_BROWN "\033[0;33m"
 # define T_CYAN "\033[0;36m"
-# define TRUE 1
-# define FALSE 0
-# define INVALID -1
 
 # ifndef PRINT_COORDS
 #  define PRINT_COORDS 0
@@ -41,15 +45,6 @@
 # ifndef PRINT_DIMENSIONS
 #  define PRINT_DIMENSIONS 0
 # endif
-
-# define PI 3.14
-# define WIDTH	1200
-# define HEIGHT	900
-# define MIN_Z_ALLOWED -68
-# define MAX_Z_ALLOWED 253
-# define X_BORDER	60
-# define Y_BORDER	40
-# define Z_FACTOR 2
 
 typedef struct s_iterator
 {
@@ -105,17 +100,20 @@ typedef struct s_ln_pt
 typedef struct s_map
 {
 	t_pt	**pt;
-	float	offset_p2p;
+	int		offset_p2p;
 	float	z_factor;
 	int		height;
 	int		*width;
 	int		max_width;
+	int		diagonal;
+// vars used for limits	
 	t_pt	min_x;
 	t_pt	max_x;
 	t_pt	min_y;
 	t_pt	max_y;
 	t_pt	min_z;
 	t_pt	max_z;
+// vars used for parsing
 	int		fd_lines;
 	int		fd1;
 	int		get_map_ok;
@@ -141,37 +139,58 @@ typedef struct s_mlx
 	void	*win;
 	t_imgs	img;
 	t_map	*map;
-	int		x;
-	int		y;
-	int		sum_x;
-	int		sum_y;
 }			t_mlx;
+//////////////////////////////////////////////////////////////////////////////
+// 11_get_map
+void		get_map(t_map *map, char *av, t_mlx *d);
+//static void	get_z(const char *str, t_map *map, int *y, int *x);
+//static void	get_color(const char *color_str, t_map *map,int *y, int *x);
+//static void	populate_point(t_map *map, t_iterator *i);
+//static void	populate_map(t_map *map);
 
-// 00_read_and_handle
+// 12_get_map_utils
 int			have_color(const char *str);
 void		make_big_str(char *av, t_map *map, char *line, char *tmp_to_free);
 void		init_map_vars(t_map *map);
 
-// 01_get_map
-void		get_map(t_map *map, char *av, t_mlx *d);
-
-// 06_set_limits
-void		get_max_width(t_map *map);
-void		set_min_and_max_xy(t_map *map);
-
-// 09_get_map_ready_to_show
+//////////////////////////////////////////////////////////////////////////////
+// 21_get_map_ready_to_show
 void		get_map_ready_to_show(t_map *map);
+//static void	set_offset_p2p(t_map *map);
+//static void	apply_offset_p2p(t_map *map);
+//static void	apply_isometric(t_map *map);
+//static void	center_map(t_map *map);
 
-// 10_set_color_based_on_z
-void		set_color_based_on_z(t_map *map);
+// 22_set_limits
+void		get_max_width(t_map *map);
+void		set_min_and_max_xyz(t_map *map);
+void		set_z_factor(t_map *map);
+//static void	init_min_and_max_cords(t_map *map);
+//static void	get_diagonal(t_map *map);
 
-// 15_draw_line
-void		draw_line(t_mlx *d, t_iterator i, int x_sum, int y_sum);
-
-// 50_do_mlx_stuff
+//////////////////////////////////////////////////////////////////////////////
+// 31_do_mlx_stuff
 void		do_mlx_stuff_and_show_map(t_mlx *d, t_map *map);
+//static int		free_mlx(t_mlx *d);
+//static int		clean_exit(t_mlx *d);
+//static void		map_to_mlx_array(t_mlx *d);
+//static int		handle_input(int key, t_mlx *d);
 
-// 95_utils
+// 32_set_color_based_on_z
+void		set_color_based_on_z(t_map *map);
+//static void	set_min_and_max_z_color(t_ln_pt *data);
+//static void	set_color_on_points(t_map *map, t_ln_pt *data);
+//static void	set_color_limits(t_ln_pt *data);
+
+// 33_draw_line
+void		draw_line(t_mlx *d, t_iterator i, int x_sum, int y_sum);
+//static void	my_px_put(t_imgs *img, t_pt pt, int color);
+//static void	set_delta_color(t_ln_pt *data);
+//static void	set_color_on_point(t_ln_pt *data);
+//static void	set_data_to_draw_line(t_ln_pt *data);
+
+//////////////////////////////////////////////////////////////////////////////
+// 88_utils
 t_iterator	set_i(int n);
 int			get_rgb_color(t_ln_pt *data);
 int			only_have_white(t_map *map);
