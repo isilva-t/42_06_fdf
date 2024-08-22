@@ -72,8 +72,6 @@ void	set_z_factor(t_map *map)
 		map->z_factor = 0.5;
 	else if (map->z_factor + map->diagonal >= 77)
 		map->z_factor = 1;
-	else if (map->z_factor + map->diagonal >= 77)
-		map->z_factor = 1;
 	else if (map->z_factor + map->diagonal >= 55)
 		map->z_factor = 2;
 	else if (map->z_factor + map->diagonal >= 30)
