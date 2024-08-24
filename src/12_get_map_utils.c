@@ -12,9 +12,10 @@
 
 #include "fdf.h"
 
-void	init_map_vars(t_map *map);
-int		have_color(const char *str);
-void	make_big_str(char *av, t_map *map, char *line, char *tmp_to_free);
+void		init_map_vars(t_map *map);
+int			have_color(const char *str);
+static void	free_in_make_big_str(char *line, t_map *map);
+void		make_big_str(char *av, t_map *map, char *line, char *tmp_to_free);
 
 void	init_map_vars(t_map *map)
 {
@@ -24,7 +25,7 @@ void	init_map_vars(t_map *map)
 	map->width = 0;
 	map->max_width = 0;
 	map->get_map_ok = FALSE;
-	return ;
+	map->first_malloc = 0;
 }
 
 int	have_color(const char *str)
@@ -50,6 +51,13 @@ int	have_color(const char *str)
 	return (TRUE);
 }
 
+static void	free_in_make_big_str(char *line, t_map *map)
+{
+	free (line);
+	if (map->first_malloc == 1)
+		free (map->big_str);
+}
+
 void	make_big_str(char *av, t_map *map, char *line, char *tmp_to_free)
 {
 	map->fd1 = open(av, O_RDONLY);
@@ -63,10 +71,11 @@ void	make_big_str(char *av, t_map *map, char *line, char *tmp_to_free)
 		return ;
 	while (line)
 	{
+		map->first_malloc++;
 		line = get_next_line(map->fd1);
 		if (!line)
 		{
-			free (line);
+			free_in_make_big_str(line, map);
 			break ;
 		}
 		tmp_to_free = map->big_str;

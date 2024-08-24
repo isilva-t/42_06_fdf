@@ -114,6 +114,7 @@ typedef struct s_map
 	t_pt	min_z;
 	t_pt	max_z;
 // vars used for parsing
+	int		first_malloc;
 	int		fd_lines;
 	int		fd1;
 	int		get_map_ok;
@@ -151,6 +152,7 @@ void		get_map(t_map *map, char *av, t_mlx *d);
 // 12_get_map_utils
 int			have_color(const char *str);
 void		make_big_str(char *av, t_map *map, char *line, char *tmp_to_free);
+//static void	free_in_make_big_str(char *line, t_map *map);
 void		init_map_vars(t_map *map);
 
 //////////////////////////////////////////////////////////////////////////////
@@ -188,6 +190,9 @@ void		draw_line(t_mlx *d, t_iterator i, int x_sum, int y_sum);
 //static void	set_delta_color(t_ln_pt *data);
 //static void	set_color_on_point(t_ln_pt *data);
 //static void	set_data_to_draw_line(t_ln_pt *data);
+
+// 34_is_pt_inside_window
+int			is_pt_inside_window(t_pt pt);
 
 //////////////////////////////////////////////////////////////////////////////
 // 88_utils

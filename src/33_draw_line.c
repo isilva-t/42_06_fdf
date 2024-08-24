@@ -24,7 +24,7 @@ void	draw_line(t_mlx *d, t_iterator i, int x_sum, int y_sum)
 
 	data.actual = d->map->pt[i.y + y_sum][i.x];
 	data.next = d->map->pt[i.y][i.x + x_sum];
-	if (data.actual.y < HEIGHT && data.actual.y >= 0)
+	if (is_pt_inside_window(data.actual) == TRUE)
 		my_px_put(&d->img, data.actual, data.actual.color);
 	set_data_to_draw_line(&data);
 	while (data.actual.x != data.next.x || data.actual.y != data.next.y)
@@ -41,7 +41,7 @@ void	draw_line(t_mlx *d, t_iterator i, int x_sum, int y_sum)
 			data.err += data.delta_x;
 			data.actual.y += data.y_direction;
 		}
-		if (data.actual.y < HEIGHT && data.actual.y >= 0)
+		if (is_pt_inside_window(data.actual) == TRUE)
 			my_px_put(&d->img, data.actual, data.actual.color);
 	}
 }

@@ -34,6 +34,7 @@ SRCS = $(GNL) ./src/00_fdf.c \
 	./src/31_do_mlx_stuff.c \
 	./src/32_set_color_based_on_z.c \
 	./src/33_draw_line.c \
+	./src/34_draw_line_utils.c \
 	./src/88_utils.c \
 	./src/99_free_stuff.c
 

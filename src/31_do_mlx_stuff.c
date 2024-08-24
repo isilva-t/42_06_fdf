@@ -66,7 +66,9 @@ static void	map_to_mlx_array(t_mlx *d)
 
 	if (only_have_white(d->map) == TRUE)
 		set_color_based_on_z(d->map);
-	i.y = 0;
+	i = set_i(0);
+	if (d->map->height == 1 && d->map->width[0] == 1)
+		draw_line(d, i, 0, 0);
 	while (i.y < d->map->height)
 	{
 		i.x = 0;

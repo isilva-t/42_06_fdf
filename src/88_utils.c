@@ -57,17 +57,22 @@ int	only_have_white(t_map *map)
 int	is_fdf_file(char *av)
 {
 	int	len;
+	int	return_val;
 
+	return_val = FALSE;
 	len = ft_strlen(av);
 	if (len <= 4)
-		return (FALSE);
+		return (return_val);
 	if (av[len - 4] == '.'
 		&& av[len - 3] == 'f'
 		&& av[len - 2] == 'd'
 		&& av[len - 1] == 'f')
-		return (TRUE);
+		return_val = TRUE;
 	else
-		return (FALSE);
+		return_val = FALSE;
+	if (return_val == TRUE && len > 4 && av[len - 5] == '/')
+		return_val = FALSE;
+	return (return_val);
 }
 
 void	print_created_map(t_map *map, int c, int d)
