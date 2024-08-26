@@ -51,7 +51,7 @@ $(NAME):
 	@$(CC) ${CFLAGS} $(SRCS) $(MLX) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 	$(MSG1)
 	
-mini:
+mlx:
 	wget https://cdn.intra.42.fr/document/document/27219/minilibx-linux.tgz
 	tar xf minilibx-linux.tgz
 	rm -rf minilibx-linux.tgz
@@ -63,8 +63,6 @@ maps:
 	rm -rf maps.zip
 	rm -rf __MACOSX
 	
-
-	
 c: 
 	@make -C $(LIBFT_DIR) --silent
 	@$(CC) ${CFLAGS} $(SRCS) -D PRINT_COORDS=1 $(MLX) $(LIBFT) $(FT_PRINTF) -o $(NAME)
@@ -75,6 +73,11 @@ d:
 	@$(CC) ${CFLAGS} $(SRCS) -D PRINT_DIMENSIONS=1 $(MLX) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 	$(MSG1)
 
+mlxdel:
+	rm -rf minilibx-linux
+
+mapsdel:
+	rm -rf test_maps
 
 clean:
 	@make clean -C $(LIBFT_DIR) --silent
@@ -86,4 +89,4 @@ fclean: clean
 
 re: fclean all
 ret: fclean t
-.PHONY: all clean fclean re mini
+.PHONY: all clean fclean re ret mini mlxdel
