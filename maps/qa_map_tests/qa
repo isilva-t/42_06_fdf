@@ -1,0 +1,76 @@
+# whithout parameters
+valgrind ./fdf
+
+# with too many parameters
+valgrind ./fdf test_maps/42.fdf test asdas
+
+# with invalid file
+valgrind ./fdf test_maps/test_sdfsdffs.fdf
+
+# flat map with nothing but 0
+valgrind ./fdf test_maps/plat.fdf
+valgrind ./fdf mytests/1.fdf
+valgrind ./fdf mytests/2.fdf
+valgrind ./fdf mytests/2b.fdf
+valgrind ./fdf mytests/3.fdf
+valgrind ./fdf mytests/3b.fdf
+
+# 4x4 map
+valgrind ./fdf mytests/4-4.fdf
+
+# 4x4 with z points different than zero
+valgrind ./fdf mytests/4-4z.fdf
+valgrind ./fdf mytests/4-4z2.fdf
+
+# 16x16 map
+valgrind ./fdf mytests/16-16.fdf
+
+# 42.fdf map
+valgrind ./fdf mytests/4-4.fdf
+######### press ESC to exit or
+######### press cross to exit
+
+# invalid maps
+valgrind ./fdf mytests/empty.fdf
+valgrind ./fdf mytests/inv.fda
+valgrind ./fdf mytests/inv2.fdf
+valgrind ./fdf mytests/.fdf
+
+# take a valid file, and "chmod 000 file_name.fdf" on it. Must not open
+
+#heavy map
+./fdf test_maps/julia.fdf
+./fdf test_maps/elem-fract.fdf
+
+# all test maps from 42
+valgrind ./fdf test_maps/10-2.fdf
+valgrind ./fdf test_maps/10-70.fdf
+valgrind ./fdf test_maps/20-60.fdf
+valgrind ./fdf test_maps/42.fdf
+valgrind ./fdf test_maps/50-4.fdf
+valgrind ./fdf test_maps/100-6.fdf
+valgrind ./fdf test_maps/basictest.fdf
+valgrind ./fdf test_maps/elem.fdf
+valgrind ./fdf test_maps/elem2.fdf
+valgrind ./fdf test_maps/elem-col.fdf
+./fdf test_maps/elem-fract.fdf
+./fdf test_maps/julia.fdf
+valgrind ./fdf test_maps/mars.fdf
+valgrind ./fdf test_maps/pentenegpos.fdf
+valgrind ./fdf test_maps/plat.fdf
+valgrind ./fdf test_maps/pnp_flat.fdf
+valgrind ./fdf test_maps/pylone.fdf
+valgrind ./fdf test_maps/pyra.fdf
+valgrind ./fdf test_maps/pyramide.fdf
+valgrind ./fdf test_maps/t1.fdf
+valgrind ./fdf test_maps/t2.fdf
+
+
+
+
+
+
+
+
+
+
