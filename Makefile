@@ -40,9 +40,9 @@ SRCS = $(GNL) ./src/00_fdf.c \
 
 OBJS = ${SRCS:.c=.o}
 MSG0 = @echo "Compiling..."
-MSG1 = @echo "_________________________________________________________________ Compiled!"
+MSG1 = @echo "_________________________________________________________________ Compiled ✅"
 
-all: $(NAME)
+all: libx $(NAME)
 
 $(NAME):
 	$(MSG0);
@@ -50,40 +50,48 @@ $(NAME):
 	@make -C $(LIBFT_DIR) --silent
 	@$(CC) ${CFLAGS} $(SRCS) $(MLX) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 	$(MSG1)
+
+demo:
+	./fdf maps/qa_map_tests/16-16.fdf
 	
-mlx:
-	wget https://cdn.intra.42.fr/document/document/27219/minilibx-linux.tgz
-	tar xf minilibx-linux.tgz
-	rm -rf minilibx-linux.tgz
-	rm -rf minilibx-linux/.git
+LIBX_DIR = minilibx-linux
+libx : $(LIBX_DIR)
+
+.PHONY: libx
+.SILENT: $(LIBX_DIR)
+$(LIBX_DIR) :
+	@if [ ! -d $(LIBX_DIR) ]; then \
+		printf "$(YELLOW)Extracting minilibx...$(CLR_RMV)...  "; \
+		tar xf minilibx-linux.tgz; \
+		printf "$(GREEN)minilibx extracted$(CLR_RMV) ✅\n"; \
+	fi
 	
-maps:
-	wget https://cdn.intra.42.fr/document/document/27216/maps.zip
-	unzip maps.zip
-	rm -rf maps.zip
-	rm -rf __MACOSX
-	
-c: 
+.PHONY: rmlibx
+rmlibx:
+	@if [  -d $(LIBX_DIR) ]; then \
+		printf "$(YELLOW)Deleting minilibx...$(CLR_RMV)  "; \
+		rm -rf $(LIBX_DIR); \
+		printf "$(GREEN)minilibx deleted$(CLR_RMV) ✅\n"; \
+	fi
+
+coords: 
 	@make -C $(LIBFT_DIR) --silent
 	@$(CC) ${CFLAGS} $(SRCS) -D PRINT_COORDS=1 $(MLX) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 	$(MSG1)
 
-d: 
+dimensions: 
 	@make -C $(LIBFT_DIR) --silent
 	@$(CC) ${CFLAGS} $(SRCS) -D PRINT_DIMENSIONS=1 $(MLX) $(LIBFT) $(FT_PRINTF) -o $(NAME)
 	$(MSG1)
 
-mlxdel:
-	rm -rf minilibx-linux
-
-mapsdel:
-	rm -rf test_maps
 
 clean:
 	@make clean -C $(LIBFT_DIR) --silent
 	@rm -rf ${OBJS}
+	@if [  -d $(LIBX_DIR) ]; then \
+	make clean -C $(LIBX_DIR) -s; fi
 
-fclean: clean
+fclean: clean rmlibx
 	@make fclean -C $(LIBFT_DIR) --silent
 	@rm -rf ${NAME}
 
