@@ -48,7 +48,9 @@ int	have_color(const char *str)
 			return (INVALID);
 		i++;
 	}
-	return (TRUE);
+	if (str[2])
+		return (TRUE);
+	return (INVALID);
 }
 
 static void	free_in_make_big_str(char *line, t_map *map)

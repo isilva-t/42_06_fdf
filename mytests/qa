@@ -1,0 +1,11 @@
+# whithout parameters
+valgrind ./fdf
+
+# with too many parameters
+valigrnd ./fdf test_maps/42.fdf test asdas
+
+# with invalid file
+valgrind ./fdf test_maps/test_sdfsdffs.fdf
+
+
+

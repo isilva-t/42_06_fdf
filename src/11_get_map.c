@@ -65,7 +65,7 @@ static void	get_color(const char *color_str, t_map *map,
 {
 	int	color;
 
-	if (have_color(color_str) == 1)
+	if (have_color(color_str) == TRUE)
 		color = ft_atoi_base(color_str + 2, 16);
 	else if (have_color(color_str) == -1)
 		color = 0xf000000;
